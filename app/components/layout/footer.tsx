@@ -1,13 +1,8 @@
 import { FacebookLogo, InstagramLogo, LinkedinLogo, TwitterLogo } from 'phosphor-react'
-import React from 'react'
 
 import { Logo } from '~/components/app/Logo'
-import { Link } from '~/components/core/link/link'
+import { Link } from '~/components/core/link'
 import { useRouteData } from '~/hooks/useRouteData'
-
-import stylesUrl from './footer.css'
-
-import type { LinksFunction } from '@remix-run/node'
 
 const ICON = {
 	Facebook: <FacebookLogo />,
@@ -30,12 +25,6 @@ const T = {
 		se: 'post address'
 	}
 } as const
-
-export const links: LinksFunction = () => {
-  return [
-		{ rel: 'stylesheet', href: stylesUrl },
-	];
-};
 
 export const Footer = () => {
 	const { site, lang } = useRouteData()

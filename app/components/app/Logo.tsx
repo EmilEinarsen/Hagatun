@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouteData } from '~/hooks/useRouteData'
-import { Link, LinkProps } from '../core/link/link'
-import { Image } from '~/components/core/image/image';
+import { Link, LinkProps } from '../core/link'
+import { Image } from '~/components/core/image';
 import { clsx } from '~/utils/utils';
 
 interface LogoProps extends LinkProps {

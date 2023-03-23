@@ -1,17 +1,7 @@
-import React from 'react'
-import { ModuleProps } from '..'
+import { ModuleProps } from '.'
 
-import stylesUrl from './partners.css'
-
-import type { LinksFunction } from '@remix-run/node';
-import { Link } from '~/components/core/link/link';
-import { Image } from '~/components/core/image/image';
-
-export const links: LinksFunction = () => {
-  return [
-		{ rel: "stylesheet", href: stylesUrl }
-	];
-};
+import { Link } from '~/components/core/link';
+import { Image } from '~/components/core/image';
 
 const Partners = ({ data }: ModuleProps<'partners'>) => {
 	return (

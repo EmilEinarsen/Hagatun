@@ -1,8 +1,11 @@
 /** @type {import('@remix-run/dev').AppConfig} */
 module.exports = {
-	watchPaths: ['sanity']
+	watchPaths: ['sanity'],
   // appDirectory: "app",
   // assetsBuildDirectory: "public/build",
   // serverBuildPath: "build/index.js",
   // publicPath: "/build/",
+  future: {
+    unstable_postcss: true,
+  },
 };

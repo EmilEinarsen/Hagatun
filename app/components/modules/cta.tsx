@@ -1,20 +1,10 @@
 import React from 'react'
 
-import Card, { links as cardLinks } from '~/components/core/card/card'
-import { Link } from '~/components/core/link/link'
-import { Image } from '~/components/core/image/image'
+import Card from '~/components/core/card'
+import { Link } from '~/components/core/link'
+import { Image } from '~/components/core/image'
 
-import stylesUrl from "./cta.css";
-
-import type { LinksFunction } from '@remix-run/node';
-import type { ModuleProps } from '..'
-
-export const links: LinksFunction = () => {
-  return [
-		{ rel: "stylesheet", href: stylesUrl },
-		...cardLinks()
-	];
-};
+import type { ModuleProps } from '.'
 
 const CTA = ({ data }: ModuleProps<'cta'>) => {
 	

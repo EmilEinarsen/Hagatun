@@ -1,18 +1,9 @@
 import { PortableText } from '@portabletext/react';
 
 import { clsx } from 'app/utils/utils';
-import { Image } from '~/components/core/image/image';
+import { Image } from '~/components/core/image';
 
-import stylesUrl from './text-image.css'
-
-import type { LinksFunction } from '@remix-run/node';
-import type { ModuleProps } from '..';
-
-export const links: LinksFunction = () => {
-  return [
-		{ rel: "stylesheet", href: stylesUrl }
-	];
-};
+import type { ModuleProps } from '.';
 
 const TextImage = ({ data }: ModuleProps<'text-image'>) => {
 	

@@ -2,24 +2,18 @@ import { Outlet, useCatch } from "@remix-run/react";
 import { LoaderArgs, LinksFunction } from "@remix-run/node";
 import { SmileySad } from "phosphor-react";
 
-import Layout, { links as layoutLinks } from "~/components/layout/layout";
-import { links as moduleLinks } from "~/components/modules";
+import Layout from "~/components/layout/layout";
 import { getSite } from "~/loaders";
 import { loadTheme } from "~/utils/theme.server";
 import { merge } from "~/utils/utils";
 import { useRouteData } from "~/hooks/useRouteData";
-import { Link } from "~/components/core/link/link";
+import { Link } from "~/components/core/link";
 
-import stylesUrl from "~/styles/global.css";
+import stylesUrl from "~/styles/index.css";
 
 export const links: LinksFunction = () => {
   return [
-		{ rel: 'stylesheet', href: 'https://unpkg.com/open-props' },
-		{ rel: 'stylesheet', href: 'https://unpkg.com/open-props/normalize.min.css' },
-		{ rel: 'stylesheet', href: 'https://unpkg.com/open-props/buttons.min.css' },
-    { rel: 'stylesheet', href: stylesUrl },
-		...layoutLinks(),
-		...moduleLinks()
+    { rel: 'stylesheet', href: stylesUrl }
   ];
 };
 

@@ -1,18 +1,7 @@
-import React from 'react'
+import { Link } from '~/components/core/link';
+import { ModuleProps } from '.';
 
-import { Link } from '~/components/core/link/link';
-import { ModuleProps } from '..';
-
-import stylesUrl from './blog-posts.css'
-
-import type { LinksFunction } from '@remix-run/node';
-import Card from '~/components/core/card/card';
-
-export const links: LinksFunction = () => {
-  return [
-		{ rel: "stylesheet", href: stylesUrl }
-	];
-};
+import Card from '~/components/core/card';
 
 const BlogPosts = ({ data }: ModuleProps<'blog-posts'>) => {
 	

@@ -3,21 +3,11 @@ import React, { useMemo } from 'react';
 import { CaretDown, List, X } from 'phosphor-react';
 import * as Drawer from '@accessible/drawer'
 
-import { useRouteData } from '../../../hooks/useRouteData'
-import { Link } from '~/components/core/link/link';
+import { Link } from '~/components/core/link';
 import { Logo } from '~/components/app/Logo';
 import { TranslationSelect } from '~/components/app/TranslationSelect';
 import { ThemeButton } from '~/components/app/ThemeButton';
-
-import stylesUrl from './header.css'
-
-import type { LinksFunction } from '@remix-run/node';
-
-export const links: LinksFunction = () => {
-  return [
-		{ rel: 'stylesheet', href: stylesUrl },
-	];
-};
+import { useRouteData } from '~/hooks/useRouteData';
 
 export const Header = () => {
 	const { site } = useRouteData()

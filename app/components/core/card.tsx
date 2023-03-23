@@ -1,17 +1,8 @@
-import React, { Children, PropsWithChildren, useMemo } from 'react'
+import React, { Children, useMemo } from 'react'
 
 import { clsx } from '~/utils/utils';
 
-import stylesUrl from './card.css'
-
-import type { LinksFunction } from "@remix-run/node";
-import { PolymorphicAsProp, PolymorphicProps } from '~/types/types';
-
-export const links: LinksFunction = () => {
-  return [
-		{ rel: "stylesheet", href: stylesUrl }
-	];
-};
+import type { PolymorphicAsProp, PolymorphicProps } from '~/types/types';
 
 
 interface CardProps<T extends React.ElementType> extends React.HTMLAttributes<HTMLDivElement>, PolymorphicAsProp<T> {

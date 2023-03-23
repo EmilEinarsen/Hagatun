@@ -1,19 +1,9 @@
-import { MapPin, Phone, EnvelopeSimple } from 'phosphor-react'
+import { MapPin, Phone } from 'phosphor-react'
 
-import { THEME } from '~/utils/theme-provider';
 import { useRouteData } from '~/hooks/useRouteData';
+import { Image } from '~/components/core/image';
 
-import stylesUrl from "./start-page-hero.css";
-
-import type { LinksFunction } from "@remix-run/node";
-import type { ModuleProps } from '..';
-import { Image } from '~/components/core/image/image';
-
-export const links: LinksFunction = () => {
-  return [
-		{ rel: "stylesheet", href: stylesUrl }
-	];
-};
+import type { ModuleProps } from '.';
 
 function StartPageHero({ data }: ModuleProps<'start-page-hero'>) {
 	const { site } = useRouteData()

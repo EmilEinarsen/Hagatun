@@ -1,16 +1,8 @@
 import { clsx } from "~/utils/utils";
-import { Image } from '~/components/core/image/image'
-
-import stylesUrl from "./hero.css";
+import { Image } from '~/components/core/image'
 
 import type { LinksFunction } from "@remix-run/node";
-import type { ModuleProps } from '..';
-
-export const links: LinksFunction = () => {
-  return [
-		{ rel: "stylesheet", href: stylesUrl }
-	];
-};
+import type { ModuleProps } from '.';
 
 function Hero({ data }: ModuleProps<'hero'>) {
 	

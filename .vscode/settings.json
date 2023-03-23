@@ -6,5 +6,8 @@
     "**/*.less",
     "node_modules/open-props/open-props.min.css"
 	],
-	"liveServer.settings.port": 3333
+  "liveServer.settings.port": 3333,
+  "conventionalCommits.scopes": [
+    "PostCSS"
+  ]
 }

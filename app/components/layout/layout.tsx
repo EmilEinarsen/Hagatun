@@ -1,20 +1,7 @@
 import { IconContext } from 'phosphor-react';
 
-import { useRouteData } from '~/hooks/useRouteData';
-import { Header, links as headerLinks } from './header/header';
-import { Footer, links as footerLinks } from './footer/footer';
-
-import stylesUrl from './layout.css'
-
-import type { LinksFunction } from "@remix-run/node";
-
-export const links: LinksFunction = () => {
-  return [
-		{ rel: 'stylesheet', href: stylesUrl },
-		...headerLinks(),
-		...footerLinks()
-	];
-};
+import { Header } from './header';
+import { Footer } from './footer';
 
 interface LayoutProps extends React.PropsWithChildren {
 	

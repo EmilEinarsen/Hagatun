@@ -1,31 +1,14 @@
 import React from 'react'
 
-import StartPageHero, { links as startPageHeroLinks } from './start-page-hero/start-page-hero'
-import CTA, { links as ctaLinks } from './cta/cta'
-import Partners, { links as partnersLinks } from './partners/partners'
-import Hero, { links as heroLinks } from './hero/hero'
-import BlogPosts, { links as blogPostLinks } from './blog-posts/blog-posts'
-import TextImage, { links as textImageLinks } from './text-image/text-image'
+import StartPageHero from './start-page-hero'
+import CTA from './cta'
+import Partners from './partners'
+import Hero from './hero'
+import BlogPosts from './blog-posts'
+import TextImage from './text-image'
 
-import type { LinksFunction, MetaFunction } from '@remix-run/node'
+import type { MetaFunction } from '@remix-run/node'
 import type { Modules } from '~/loaders'
-
-export const links: LinksFunction = () => {
-	return [
-		...startPageHeroLinks(),
-		...ctaLinks(),
-		...heroLinks(),
-		...partnersLinks(),
-		...blogPostLinks(),
-		...textImageLinks()
-	]
-}
-
-export const meta: MetaFunction = (props) => {
-	return {
-
-	}
-}
 
 export interface ModuleProps<T extends Modules['_type'] = Modules['_type']> {
   index: number;
