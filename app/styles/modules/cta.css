@@ -74,6 +74,7 @@ section.cta .card__body {
 }
 
 section.cta .card__body h3 {
-	font-size: var(--font-size-5);
+	font-size: clamp(1.5rem,3vw,2rem);
+  font-weight: 600;
 	text-align: center;
 }

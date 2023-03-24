@@ -104,17 +104,13 @@ section.start-page-hero {
 
 	position: relative;
 	padding: var(--size-4) var(--size-6);
-	margin-block-start: var(--size-8);
+	margin-block-start: var(--size-10);
 	border-radius: 0 var(--contact-list-radius) var(--contact-list-radius);
 	align-self: flex-end;
 
 	display: flex;
 	justify-content: center;
-}
-
-
-.start-page-hero-contact-list > div {
-	width: fit-content;
+  width: max-content;
 }
 
 .start-page-hero-contact-list h2 {
@@ -157,10 +153,6 @@ section.start-page-hero {
 @media (min-width: 768px) {
 	.start-page-hero-content {
 		justify-content: unset;
-	}
-
-	.start-page-hero-contact-list {
-		width: fit-content;
 	}
 	
 	.start-page-hero-contact-list > div {

@@ -1,32 +1,38 @@
 .hero {
 	--_image: ;
-	--_justify: flex-start;
+	--_justify: center;
 	--_min-height: 75vh;
 
 	--_image-brightness: 1;
-	--_image-blur: 2px;
+	--_image-blur: 1px;
+
+
+	--_image-content-padding: var(--size-5);
+	--_image-content-margin: 0;
 }
 
 @media (min-width: 768px) {
 	.hero {
 		--_min-height: var(--size-15);
 		--_image-blur: 0;
+    --_image-content-margin: var(--size-6);
 	}
+
+  .hero--placement-left {
+    --_justify: flex-start;
+  }
+  
+  .hero--placement-right {
+    --_justify: flex-end;
+  }
 }
 
-@media (prefers-color-scheme: dark) {
-	.hero {
-		--_image-brightness: .8;
-	}
+html[color-scheme=dark] .hero {
+  --_image-brightness: .9;
 }
 
-.hero--placement-left {
-	--_justify: flex-start;
-}
 
-.hero--placement-right {
-	--_justify: flex-end;
-}
+
 
 .hero {
   position: relative;
@@ -48,7 +54,6 @@
 
 .hero h2 {
 	margin-block-end: 1ch;
-	font-size: var(--font-size-7);
 	font-weight: var(--font-weight-9);
 }
 
@@ -63,12 +68,12 @@
 }
 
 .hero__content {
-	--_padding: var(--size-5);
 	position: relative;
-	padding: var(--_padding);
-	width: clamp(var(--size-content-1), 100%, var(--size-content-2) + var(--_padding) * 2);
+	padding: var(--_image-content-padding);
+	width: clamp(var(--size-content-1), 100vw, var(--size-content-2) + var(--_image-content-padding) * 2);
 	border-radius: var(--radius-conditional-3);
 	overflow: hidden;
+  margin: var(--_image-content-margin);
 }
 
 .hero__content::before {
@@ -80,6 +85,5 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: var(--surface-4);
-	opacity: .5;
+	background-color: var(--surface-1);
 }

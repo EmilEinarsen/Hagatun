@@ -22,6 +22,11 @@ header {
 		display: none;
 	}
 }
+@media (prefers-color-scheme: dark) {
+	:root {
+    --header-shadow: var(--shadow-1);
+	}
+}
 
 header .navigation {
   display: flex;
@@ -52,7 +57,7 @@ header .navigation {
 .navigation__left button.menu-button,
 .navigation__drawer button.menu-button {
 	margin-inline-start: auto;
-	padding: .75ch;
+	padding: .5ch;
 	align-self: flex-end;
 	font-size: var(--font-size-4);
 	border-radius: var(--radius-2);

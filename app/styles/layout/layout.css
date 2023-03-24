@@ -14,6 +14,10 @@ main {
   min-height: 75vh;
 }
 
+main > section:first-of-type {
+  margin-top: calc(var(--header-block-padding) * 2 + var(--header-logo-size));
+}
+
 main > section,
 header,
 footer {
@@ -45,13 +49,11 @@ footer {
 /* Header Swish Banner */
 
 header {
-	position: relative;
+	position: fixed;
+  top: 0;
+  left: 0;
 	z-index: 1000;
   width: 100%;
   background-color: var(--surface-1);
   box-shadow: var(--header-shadow);
-}
-
-section:first-child {
-	margin-block: unset;
 }

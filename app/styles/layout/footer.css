@@ -73,6 +73,3 @@ footer button {
 	max-width: 25ch;
 	margin-block-start: var(--size-4);
 }
-footer address {
-	margin-block-start: var(--size-4);
-}

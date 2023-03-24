@@ -16,9 +16,6 @@
 	.text-image--alignment-right {
 		--_alignment: row-reverse;
 	}
-	section:first-child.text-image {
-		margin-block-start: var(--size-8);
-	}
 }
 
 .text-image h1 {
