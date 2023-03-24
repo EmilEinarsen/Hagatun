@@ -80,10 +80,15 @@ function ThemeProvider({
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
+  /** 
+   * instead of theme 
+   */
+  const ESCAPE_DARK_MODE_UNTIL_WE_WANT_IT = THEME.light 
+
   return (
-    <ThemeContext.Provider value={[theme, setTheme]}>
+    <ThemeContext.Provider value={[ESCAPE_DARK_MODE_UNTIL_WE_WANT_IT, setTheme]}>
       {children && typeof children === 'object' && 'props' in children 
-				? cloneElement(children, { 'color-scheme': theme }) 
+				? cloneElement(children, { 'color-scheme': ESCAPE_DARK_MODE_UNTIL_WE_WANT_IT }) 
 				: children
 			}
     </ThemeContext.Provider>
