@@ -77,7 +77,6 @@ section.start-page-hero {
 
 .start-page-hero-title {
 	color: var(--_title-color);
-	max-inline-size: clamp(15rem,85vw,22.5rem);
 	font-size: var(--_title-font-size);
 }
 
