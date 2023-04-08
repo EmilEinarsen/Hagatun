@@ -21,7 +21,7 @@ export const section = defineType({
       name: 'content',
       type: 'array',
       of: [
-        { type: 'start-page-hero' }
+        
       ],
       validation: Rule =>
         Rule.length(1).error('You can only have one piece of content')

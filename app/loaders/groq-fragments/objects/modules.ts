@@ -7,20 +7,6 @@ import { Theme } from '~/utils/theme-provider'
 import { Post } from '../documents/blog-post'
 import { PortableTextBlock } from 'sanity'
 
-type StartPageHeroModule = {
-	_type: 'start-page-hero'
-	_key: string
-	title: string
-	subtitle: string
-	bgType: string
-	image: ImageSrc
-	video: {
-		id: string
-		title: string
-	}
-	theme: Theme
-} 
-
 type CTAModule = {
 	_type: 'cta',
 	_key: string
@@ -65,30 +51,14 @@ type TextImageModule = {
 	alignment: 'left' | 'right'
 }
 
-export type Modules = 
-	| StartPageHeroModule
+export type Modules =
+  | HeroModule
 	| CTAModule
-	| HeroModule
 	| PartnersModule
 	| BlogPostsModule
 	| TextImageModule
 
 export const modules = groq`
-  _type == 'start-page-hero' => {
-    _type,
-    _key,
-		title,
-		subtitle,
-    bgType,
-    image {
-      ${image}
-    },
-    video{
-      id,
-      title
-    },
-		theme
-  },
 	_type == 'cta' => {
 		_type,
 		_key,
@@ -98,13 +68,18 @@ export const modules = groq`
 		}
 	},
 	_type == 'hero' => {
-		_type,
-		_key,
+    _type,
+    _key,
 		title,
 		text,
-		image{
-			${image}
-		},
+    bgType,
+    image {
+      ${image}
+    },
+    video{
+      id,
+      title
+    },
 		theme,
 		contentPlacement
 	},

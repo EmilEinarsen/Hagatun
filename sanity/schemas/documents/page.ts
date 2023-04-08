@@ -59,7 +59,6 @@ export const page = defineType({
       name: 'modules',
       type: 'array',
       of: [
-        { type: 'start-page-hero' },
 				{ type: 'hero' },
         { type: 'partners' },
         { type: 'blog-posts' },

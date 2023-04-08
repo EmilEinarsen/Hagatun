@@ -1,3 +1,6 @@
+import { Star } from 'phosphor-react';
+import { hero } from 'sanity-page-builder'
+
 import { blogPost } from "./documents/blog-post";
 import { menu } from "./documents/menu";
 import { page } from "./documents/page";
@@ -8,9 +11,7 @@ import { settingsHeader } from "./documents/settings-header";
 import { settingsSeo } from "./documents/settings-seo";
 import { blogPosts } from "./modules/blog-posts";
 import { cta } from "./modules/cta";
-import { hero } from "./modules/hero";
 import { partners } from "./modules/partners";
-import { startPageHero } from "./modules/start-page-hero";
 import { textImage } from "./modules/text-image";
 import { author } from "./objects/author";
 import { blockContent } from "./objects/blockContent";
@@ -36,9 +37,8 @@ export const schemaTypes = [
 	/* Module types */
 	blogPosts,
 	cta,
-	hero,
+	{ ...hero, icon: Star },
 	partners,
-	startPageHero,
 	textImage,
 
 	/* Object types */
@@ -51,4 +51,4 @@ export const schemaTypes = [
 	office,
 	seo,
 	socialLink
-]
+] as const

@@ -1,13 +1,10 @@
 import React from 'react'
 
-import StartPageHero from './start-page-hero'
+import Hero from './hero'
 import CTA from './cta'
 import Partners from './partners'
-import Hero from './hero'
-import BlogPosts from './blog-posts'
 import TextImage from './text-image'
 
-import type { MetaFunction } from '@remix-run/node'
 import type { Modules } from '~/loaders'
 
 export interface ModuleProps<T extends Modules['_type'] = Modules['_type']> {
@@ -18,10 +15,9 @@ export interface ModuleProps<T extends Modules['_type'] = Modules['_type']> {
 }
 
 const modules = {
-  'start-page-hero': StartPageHero,
+	hero: Hero,
 	cta: CTA,
 	partners: Partners,
-	hero: Hero,
 	'text-image': TextImage
 } as { [k in Modules['_type']]: React.FunctionComponent<ModuleProps> };
 
