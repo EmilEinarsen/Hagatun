@@ -3,7 +3,6 @@ import groq from 'groq'
 import { image, ImageSrc } from './image'
 import { Card, card } from './card'
 import { post } from './post'
-import { Theme } from '~/utils/theme-provider'
 import { Post } from '../documents/blog-post'
 import { PortableTextBlock } from 'sanity'
 
@@ -11,6 +10,7 @@ type CTAModule = {
 	_type: 'cta',
 	_key: string
 	title: string
+	subtitle: string
 	cards: Card[]
 }
 
@@ -20,8 +20,8 @@ type HeroModule = {
 	title: string
 	text: string
 	image: ImageSrc
-	theme: Theme
-	contentPlacement: 'left' | 'right'
+	backgroundWidth: 'page' | 'container'
+	contentPlacement: 'left' | 'center' | 'right'
 }
 
 type PartnersModule = {
@@ -33,6 +33,7 @@ type PartnersModule = {
 		_key: string
 		logo: ImageSrc
 		href: string
+    name: string
 	}[]
 }
 
@@ -51,18 +52,27 @@ type TextImageModule = {
 	alignment: 'left' | 'right'
 }
 
+type ContactFormModule = {
+	_type: 'contact-form'
+	_key: string
+	title: string
+	subtitle: string
+}
+
 export type Modules =
   | HeroModule
 	| CTAModule
 	| PartnersModule
 	| BlogPostsModule
 	| TextImageModule
+  | ContactFormModule
 
-export const modules = groq`
+const actualModules = groq`
 	_type == 'cta' => {
 		_type,
 		_key,
 		title,
+		subtitle,
 		cards[] {
 			${card}
 		}
@@ -80,6 +90,7 @@ export const modules = groq`
       id,
       title
     },
+    backgroundWidth,
 		theme,
 		contentPlacement
 	},
@@ -94,6 +105,7 @@ export const modules = groq`
 				${image}
 			},
 			href,
+      name,
 		},
 	},
 	_type == 'blog-posts' => {
@@ -119,5 +131,20 @@ export const modules = groq`
 			${image}
     },
 		alignment
+	},
+	_type == 'contact-form' => {
+		_type,
+		_key,
+		title,
+		subtitle,
+	}
+`
+
+export const modules = groq`
+  ${actualModules},
+	_type == 'section-reference' => {
+		...section->content[0] {
+      ${actualModules}
+    }
 	}
 `

@@ -7,24 +7,28 @@ import { image, ImageSrc } from '../objects/image'
 import { Header, header } from './header'
 import { Footer, footer } from './footer'
 
+export type Office = {
+  _type: 'office'
+  _key: string
+  address: string
+  name: string
+  phoneNumber: string
+}
+
+export type Company = {
+  _key: string
+  _type: 'information',
+  postalAddress: string
+  email: string
+  offices?: Office[]
+}
+
 export type Site = {
 	home: ReferenceWithSlug
 	pages: (ReferenceWithSlug & { translations: ReferenceWithSlug[] })[]
 	header: Header
 	footer: Footer
-	company: {
-		_key: string
-		_type: 'information',
-		postalAddress: string
-		email: string
-		offices?: {
-			_type: 'office'
-			_key: string
-			address: string
-			name: string
-			phoneNumber: string
-		}[]
-	}
+	company: Company
 	title: string
 	shortTitle: string
 	rootDomain: string

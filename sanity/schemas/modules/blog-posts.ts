@@ -1,4 +1,4 @@
-import { Cards } from "phosphor-react";
+import { Cards } from "@phosphor-icons/react";
 import { defineType } from "sanity";
 
 export const blogPosts = defineType({

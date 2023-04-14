@@ -1,4 +1,4 @@
-import { LinkSimpleHorizontal } from 'phosphor-react'
+import { LinkSimpleHorizontal } from '@phosphor-icons/react'
 import { defineField, defineType } from 'sanity';
 import { i18nConfig } from 'sanity/lib/i18n';
 

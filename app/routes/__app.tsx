@@ -1,26 +1,23 @@
-import { Outlet, useCatch } from "@remix-run/react";
+import { Link, Outlet, useCatch } from "@remix-run/react";
 import { LoaderArgs, LinksFunction } from "@remix-run/node";
-import { SmileySad } from "phosphor-react";
+import { SmileySad } from "@phosphor-icons/react";
 
 import Layout from "~/components/layout/layout";
 import { getSite } from "~/loaders";
-import { loadTheme } from "~/utils/theme.server";
 import { merge } from "~/utils/utils";
 import { useRouteData } from "~/hooks/useRouteData";
-import { Link } from "~/components/core/link";
 
-import stylesUrl from "~/styles/index.css";
+import stylesheet from "~/css/index.css";
 
 export const links: LinksFunction = () => {
   return [
-    { rel: 'stylesheet', href: stylesUrl }
+    { rel: 'stylesheet', href: stylesheet },
   ];
 };
 
-export const loader = async ({ request, params }: LoaderArgs) => {
-  const data = merge([
-		getSite(params),
-		loadTheme(request)
+export const loader = async ({ params }: LoaderArgs) => {
+  const data = await merge([
+		getSite(params)
 	])
 
   return data

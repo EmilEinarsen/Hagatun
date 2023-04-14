@@ -1,4 +1,4 @@
-import { IconContext } from 'phosphor-react';
+import { IconContext } from '@phosphor-icons/react';
 
 import { Header } from './header';
 import { Footer } from './footer';
@@ -13,15 +13,21 @@ function Layout({ children }: LayoutProps) {
 		<IconContext.Provider
 			value={{
 				size: "1rem",
-				weight: "fill",
+				weight: 'light',
 				mirrored: false,
 			}}
 		>
-			<Header />
-			<main>
-				{children}
-			</main>
-			<Footer />
+      <div className="flex flex-col min-h-screen overflow-hidden">
+
+        <Header />
+        
+        <main className="flex-grow pt-16">
+          {children}
+        </main>
+        
+        <Footer />
+
+      </div>
 		</IconContext.Provider>
 	);
 }

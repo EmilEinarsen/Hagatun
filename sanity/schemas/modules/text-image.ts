@@ -1,4 +1,4 @@
-import { Textbox } from "phosphor-react";
+import { Textbox } from "@phosphor-icons/react";
 import { defineType } from "sanity";
 import { customImage } from "../../lib/custom-image";
 

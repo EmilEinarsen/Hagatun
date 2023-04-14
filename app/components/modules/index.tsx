@@ -6,6 +6,7 @@ import Partners from './partners'
 import TextImage from './text-image'
 
 import type { Modules } from '~/loaders'
+import ContactForm from './contact-form'
 
 export interface ModuleProps<T extends Modules['_type'] = Modules['_type']> {
   index: number;
@@ -18,7 +19,8 @@ const modules = {
 	hero: Hero,
 	cta: CTA,
 	partners: Partners,
-	'text-image': TextImage
+	'text-image': TextImage,
+  'contact-form': ContactForm
 } as { [k in Modules['_type']]: React.FunctionComponent<ModuleProps> };
 
 export const Module = ({

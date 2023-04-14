@@ -1,10 +1,9 @@
 import { json, LoaderFunction } from '@remix-run/node';
 
-import { urlBuilder } from '~/utils/urlBuilder';
-import { getThemeSession } from '~/utils/theme.server'
 import { getSite } from '~/loaders';
 import { assert } from '~/utils/utils';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { urlBuilder } from '~/utils/urlBuilder';
 
 
 const createImageGenerator = (src: SanityImageSource) => ({ size , ...rest }: { size: number }) => ({
@@ -16,7 +15,6 @@ const createImageGenerator = (src: SanityImageSource) => ({ size , ...rest }: { 
 })
 
 export const loader: LoaderFunction = async ({ request, params }) => {
-	const isDarkMode = (await getThemeSession(request)).getTheme() === 'dark'
 	const { site } = await getSite(params)
 	assert(site)
 
@@ -28,8 +26,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 			name: site.title,
 			start_url: '/',
 			display: 'standalone',
-			background_color: isDarkMode ? '#d3d7dd' : '#f8f9fa',
-			theme_color: isDarkMode ? '#C3A94D' : '#ac9339',
+			background_color: '#f8f9fa',
+			theme_color: '#ac9339',
 			shortcuts: getImage ? [
 				{ 
 					name: 'Homepage',

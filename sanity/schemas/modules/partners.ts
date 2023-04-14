@@ -1,4 +1,4 @@
-import { Handshake } from "phosphor-react";
+import { Handshake } from "@phosphor-icons/react";
 import { defineType } from 'sanity';
 
 export const partners = defineType({
@@ -26,6 +26,11 @@ export const partners = defineType({
 				name: 'partnerLogo',
 				title: 'PartnerLogo',
 				fields: [
+          {
+            type: 'string',
+            name: 'name',
+            title: 'Partner name',
+          },
 					{
 						type: 'image',
 						name: 'logo',

@@ -5,7 +5,7 @@ import {
 	InstagramLogo,
 	TwitterLogo,
 	LinkedinLogo,
-} from 'phosphor-react'
+} from '@phosphor-icons/react'
 import { defineType } from 'sanity'
 
 export const getIcon = (icon: string) => {

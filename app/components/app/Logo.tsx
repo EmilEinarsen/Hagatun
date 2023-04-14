@@ -1,10 +1,9 @@
-import React from 'react'
+import { Link, LinkProps } from '@remix-run/react';
 import { useRouteData } from '~/hooks/useRouteData'
-import { Link, LinkProps } from '../core/link'
-import { Image } from '~/components/core/image';
 import { clsx } from '~/utils/utils';
+import { Image } from '../core/image';
 
-interface LogoProps extends LinkProps {
+interface LogoProps extends Omit<LinkProps, 'to'> {
 	titleType?: 'short' | 'long' | 'none'
 }
 
@@ -14,9 +13,21 @@ export const Logo = ({ titleType = 'long', ...props }: LogoProps) => {
 	const title = titleType === 'long' ? site.title : titleType === 'short' ? site.shortTitle : undefined
 	
 	return (
-		<Link {...props} to={site.home.slug} className={clsx('logo', props.className)}>
-			{site.seo.favicon && <Image image={site.seo.favicon} loading='eager' isInline />}
-			{title && <span style={{ fontSize: 'var(--font-size-2)', letterSpacing: 'var(--font-letterspacing-3)' }}>{title}</span>}
-		</Link>
+		<Link {...props} to={site.home.slug} aria-label={site.title}>
+      <div className="flex items-center justify-between">
+        {site.seo.favicon && (
+          <div className={titleType === 'none' ? 'w-16 h-16' : 'w-12 h-12'}>
+            <Image 
+              image={site.seo.favicon}
+              loading='eager'
+              width={titleType === 'none' ? 64 : 48}
+            />
+          </div>
+        )}
+        {title && <h1 className="ml-2 hidden text-md font-light tracking-[.2em] uppercase font-serif md:block">
+          {title}
+        </h1>}
+      </div>
+    </Link>
 	)
 }

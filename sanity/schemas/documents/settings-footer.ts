@@ -1,4 +1,4 @@
-import { PaperPlaneTilt, List, AnchorSimple } from 'phosphor-react'
+import { PaperPlaneTilt, List, AnchorSimple } from '@phosphor-icons/react'
 import { defineType } from 'sanity'
 import { i18nConfig } from 'sanity/lib/i18n'
 

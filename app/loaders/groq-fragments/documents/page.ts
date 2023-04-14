@@ -11,7 +11,7 @@ export type Page = {
 	lang: Locale
 	modules: Modules[] | null
 	seo: any
-	translations: {
+	translations?: {
 		slug: string
 		title: string
 		lang: Locale
@@ -29,8 +29,9 @@ export const page = groq`
 		!defined(_ref) => {
 			${modules},
 		}
-	},
+	}
+`/* 
 	"translations": *[_type == 'page']${filterById.replace('$id', '^._id')} { 
 		${referenceWithSlug}
 	},
-`
+*/

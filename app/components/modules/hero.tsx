@@ -1,68 +1,71 @@
-import { MapPin, Phone } from 'phosphor-react'
-import { useLocation } from '@remix-run/react';
+import { Link, useLocation } from '@remix-run/react';
+import { ArrowRight } from '@phosphor-icons/react';
 
 import { useRouteData } from '~/hooks/useRouteData';
-import { Image } from '~/components/core/image';
+import { Image } from '../core/image';
 import { clsx } from '~/utils/utils';
 
 import type { ModuleProps } from '.';
 
-function StartPageHero({ data, index }: ModuleProps<'hero'>) {
+export const heroHeight = 650
+
+function Hero({ data, index }: ModuleProps<'hero'>) {
   const isStartPageHero = useLocation().pathname === '/' && !index
 	const { site } = useRouteData()
 
-	return isStartPageHero ? (
-		<section 
-			className="start-page-hero" 
-			color-scheme={data.theme}
-		>
-			<div>
-				<Image image={data.image} loading='eager' isFullscreen />
-				<div className="start-page-hero-content">
-					<h1 className="start-page-hero-title">{data.title}</h1>
-					<p className="start-page-hero-subtitle">{data.text}</p>
-					<div className="start-page-hero-contact-list">
-						<h2>Kontakta oss</h2>
-						<div>
-							<div>
-								<h3>Plats</h3>
-								<div>
-									{site?.company.offices?.map(v => <p key={v._key}>{v.address} <MapPin /></p>)}
-								</div>
-							</div>
-							<hr/>
-							<div>
-								<h3>Telefon</h3>
-								<div>
-									{site?.company.offices?.map(v => <p key={v._key}><a href={`tel:${v.phoneNumber}`}>{v.phoneNumber}</a> <Phone mirrored /></p>)}
-								</div>
-							</div>
-							<hr/>
-							<a href={`mailto:${site?.company.email}`}>
-								<button className='primary'>{site?.company.email}</button>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	) : (
-		<section
-      color-scheme={data.theme}
-      className={clsx(
-        'hero',
-        `hero--placement-${data.contentPlacement}`
+  const justifyContent = data.contentPlacement === 'right' ? 'sm:justify-end' : data.contentPlacement === 'center' ? 'sm:justify-center' : 'sm:justify-start'
+  const prose = 'prose prose-lg prose-gray prose-p:text-md prose-p:text-gray-500' + (isStartPageHero ? ' lg:prose-xl' : '')
+
+  const image = (
+    <Image
+      image={data.image}
+      loading={isStartPageHero ? 'eager' : 'lazy'}
+      height={heroHeight}
+      mode='cover'
+      background
+    />
+  )
+
+  const content = (
+    <div className='relative w-full max-w-lg p-8 bg-white lg:p-12 h-min'>
+      <div className={prose}>
+        <h2>{data.title}</h2>
+        <p>{data.text}</p>
+      </div>
+      {isStartPageHero && (
+        <div className='mt-12'>
+          <div className='flex flex-wrap gap-2'>
+            <Link to='#contact-form' className="text-white bg-blue-600 btn hover:bg-blue-700">Kontakta oss</Link>
+            <Link to='#cta' className="btn">Våra tjänster <ArrowRight className='inline w-4 h-4 ml-2' /></Link>
+          </div>
+        </div>
       )}
-    >
-      <Image image={data.image} />
-      <div>
-        <div className='hero__content'>
-          <h2>{data.title}</h2>
-          <p>{data.text}</p>
+    </div>
+  )
+  
+	return data.backgroundWidth === 'page' ? (
+		<section className='relative'> 
+      {image}
+      <div className='max-w-6xl px-4 py-24 mx-auto max-sm:py-10 sm:px-6 h-[650px]'>
+        <div className={clsx(
+          'relative flex items-center h-full justify-center',
+          justifyContent
+        )}>
+          {content}
         </div>
       </div>
     </section>
-  )
+  ) : (
+    <section className='max-w-6xl mx-auto sm:py-24 sm:px-6'>
+      <div className={clsx(
+        'relative flex items-center p-4 h-[650px] justify-center',
+        justifyContent
+      )}>
+        {image}
+        {content}
+      </div>
+    </section>
+  );
 }
 
-export default StartPageHero
+export default Hero

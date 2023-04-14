@@ -1,21 +1,20 @@
 import { PassThrough } from "stream";
-import { EntryContext, redirect } from "@remix-run/node";
+
+import type { EntryContext } from "@remix-run/node";
 import { Response } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import isbot from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
-import { i18nConfig } from "sanity/lib/i18n";
-import { getNormalizedURLPathname, redirectMaliciousRequests, getLocaleFromReqUrl, stripBaseLocaleFromURL, stripTrailingSlashFromURL } from "./utils/server-redirects";
 
 const ABORT_DELAY = 5000;
 
-export default function handleRequest(
+const handleRequest = (
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext
-) {
-  return isbot(request.headers.get("user-agent"))
+) =>
+  isbot(request.headers.get("user-agent"))
     ? handleBotRequest(
         request,
         responseStatusCode,
@@ -28,21 +27,21 @@ export default function handleRequest(
         responseHeaders,
         remixContext
       );
-}
+export default handleRequest;
 
-function handleBotRequest(
+const handleBotRequest = (
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext
-) {
-  return new Promise((resolve, reject) => {
+) =>
+  new Promise((resolve, reject) => {
     let didError = false;
 
     const { pipe, abort } = renderToPipeableStream(
       <RemixServer context={remixContext} url={request.url} />,
       {
-        onAllReady() {
+        onAllReady: () => {
           const body = new PassThrough();
 
           responseHeaders.set("Content-Type", "text/html");
@@ -56,10 +55,10 @@ function handleBotRequest(
 
           pipe(body);
         },
-        onShellError(error: unknown) {
+        onShellError: (error: unknown) => {
           reject(error);
         },
-        onError(error: unknown) {
+        onError: (error: unknown) => {
           didError = true;
 
           console.error(error);
@@ -69,51 +68,20 @@ function handleBotRequest(
 
     setTimeout(abort, ABORT_DELAY);
   });
-}
 
-function handleBrowserRequest(
+const handleBrowserRequest = (
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext
-) {
-	const url = new URL(request.url);
-
-  const headers: Record<string, string> = {};
-
-	const originalUrl =  url.toString()
-	// normalize
-	url.pathname = getNormalizedURLPathname(url)
-
-	try {
-		// Early return if it is a public file such as an image
-		if (/* Regex to check whether something has an extension, e.g. .jpg *//\.(.*)$/.test(url.pathname)) throw ''
-
-		// redirect malicious requests
-		redirectMaliciousRequests(url)
-
-
-		const locale = getLocaleFromReqUrl(request, url)
-		if(i18nConfig.stripBase && locale === i18nConfig.base) {
-			stripBaseLocaleFromURL(url)
-		}
-
-		stripTrailingSlashFromURL(url)
-		
-		const cleanedUrl = url.toString()
-
-		if (originalUrl !== cleanedUrl) {
-			return redirect(cleanedUrl, { headers, status: 301 });
-		}
-	} catch (error) {}
-	
-  return new Promise((resolve, reject) => {
+) =>
+  new Promise((resolve, reject) => {
     let didError = false;
 
     const { pipe, abort } = renderToPipeableStream(
       <RemixServer context={remixContext} url={request.url} />,
       {
-        onShellReady() {
+        onShellReady: () => {
           const body = new PassThrough();
 
           responseHeaders.set("Content-Type", "text/html");
@@ -127,10 +95,10 @@ function handleBrowserRequest(
 
           pipe(body);
         },
-        onShellError(err: unknown) {
-          reject(err);
+        onShellError: (error: unknown) => {
+          reject(error);
         },
-        onError(error: unknown) {
+        onError: (error: unknown) => {
           didError = true;
 
           console.error(error);
@@ -140,4 +108,3 @@ function handleBrowserRequest(
 
     setTimeout(abort, ABORT_DELAY);
   });
-}

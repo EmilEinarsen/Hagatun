@@ -1,7 +1,6 @@
 
 import { client } from '~/utils/sanityClient'
 import { urlBuilder } from '~/utils/urlBuilder'
-import { loadTheme } from '~/utils/theme.server'
 import { assert } from '~/utils/utils'
 import { blogPostQueryBySlug, pageQueryBySlug, pageQueryById, siteQuery, queryHomeID } from './groq-fragments/query'
 import { getLangAndSlugFromParams } from '../../sanity/lib/i18n'
@@ -92,8 +91,7 @@ export async function getBlogPost(params: Params) {
 export interface RouteData extends 
 	Awaited<ReturnType<typeof getPage>>, 
 	Awaited<ReturnType<typeof getBlogPost>>, 
-	Awaited<ReturnType<typeof getSite>>, 
-	Awaited<ReturnType<typeof loadTheme>> {}
+	Awaited<ReturnType<typeof getSite>> {}
 
 const getShareGraphic = (src: SanityImageSource) => urlBuilder.image(src).width(1200).height(630).url()
 

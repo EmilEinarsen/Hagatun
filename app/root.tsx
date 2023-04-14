@@ -11,8 +11,6 @@ import { DynamicLinks } from 'remix-utils'
 
 import { useRouteData } from "./hooks/useRouteData";
 
-import { ThemeBody, ThemeHead, ThemeProvider } from "~/utils/theme-provider";
-
 export const links: LinksFunction = () => {
   return [
 		{ rel: 'manifest', href: '/manifest.json' },
@@ -31,28 +29,24 @@ export const meta: MetaFunction = () => {
 
 
 function Root({ title }: {title?: string}) {
-	const { theme, lang } = useRouteData()
+	const { lang } = useRouteData()
 	
   return (
-    <ThemeProvider specifiedTheme={theme}>
-			<html lang={lang}>
-				<head>
-					{title && <title>{title}</title>}
-					<Meta />
-					<Links />
-					<DynamicLinks />
-					<ThemeHead ssrTheme={Boolean(theme)} />
-				</head>
-				<body>
-					<Outlet />
-					<ThemeBody ssrTheme={Boolean(theme)} />
-					<ScrollRestoration />
-					<Scripts />
-					{process.env.NODE_ENV === "development" && <LiveReload />}
-					<div id="portals" className="portals" />
-				</body>
-			</html>
-		</ThemeProvider>
+    <html lang={lang}>
+      <head>
+        {title && <title>{title}</title>}
+        <Meta />
+        <Links />
+        <DynamicLinks />
+      </head>
+      <body>
+        <Outlet />
+        <ScrollRestoration />
+        <Scripts />
+        {process.env.NODE_ENV === "development" && <LiveReload />}
+        <div id="portals" className="portals" />
+      </body>
+    </html>
   );
 }
 
