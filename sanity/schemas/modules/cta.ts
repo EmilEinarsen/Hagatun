@@ -1,4 +1,4 @@
-import { SquaresFour } from 'phosphor-react'
+import { SquaresFour } from '@phosphor-icons/react'
 import { defineType } from 'sanity'
 
 export const cta =  defineType({
@@ -11,6 +11,11 @@ export const cta =  defineType({
 			type: 'string',
 			name: 'title',
 			title: 'Title',
+		},
+		{
+			type: 'string',
+			name: 'subtitle',
+			title: 'Subtitle',
 		},
 		{
 			type: 'array',

@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Additional styles */
+@import './utils.css';
+@import './theme.css';
+
+@layer base {
+  
+}
+
+/* Tailwind directives: https://tailwindcss.com/docs/functions-and-directives/#responsive */
+
+
+html {
+  scroll-behavior: smooth;
+  @apply text-gray-600 bg-white;
+}
+
+::selection {
+  background: #B4D5FF;
+}
+
+html::-moz-selection { /* Code for Firefox */
+  background: #B4D5FF;
+}
+
+/* Buttons */
+.btn,
+.btn-sm {
+  @apply inline-flex items-center justify-center font-medium leading-snug transition duration-150 ease-in-out border border-transparent;
+}
+
+.btn {
+  @apply px-8 py-3 hover:shadow;
+}
+
+.btn-sm {
+  @apply px-4 py-2 shadow;
+}

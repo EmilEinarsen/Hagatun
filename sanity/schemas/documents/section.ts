@@ -1,6 +1,6 @@
 import React from 'react'
 import { defineType } from 'sanity'
-import { Broadcast } from 'phosphor-react'
+import { Broadcast } from '@phosphor-icons/react'
 
 export const section = defineType({
   title: 'Reusable Section',
@@ -21,7 +21,8 @@ export const section = defineType({
       name: 'content',
       type: 'array',
       of: [
-        { type: 'start-page-hero' }
+				{ type: 'contact-form' },
+				{ type: 'cta' },
       ],
       validation: Rule =>
         Rule.length(1).error('You can only have one piece of content')
@@ -30,11 +31,11 @@ export const section = defineType({
   preview: {
     select: {
       name: 'name',
-      content: 'content.0'
+      content: 'content'
     },
     prepare: v => ({
 			title: v.name,
-			subtitle: v.content._type
+			subtitle: v.content[0]._type
     })
   }
 })

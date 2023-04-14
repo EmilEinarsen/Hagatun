@@ -16,7 +16,6 @@ const hiddenDocTypes = (listItem: ListItemBuilder) =>
     'seoSettings',
     'headerSettings',
     'footerSettings',
-		'section',
 
 		'author',
 		'category',

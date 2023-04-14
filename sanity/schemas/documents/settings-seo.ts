@@ -1,4 +1,4 @@
-import { GlobeSimple } from 'phosphor-react'
+import { GlobeSimple } from '@phosphor-icons/react'
 import React from 'react'
 import { defineField, defineType } from 'sanity'
 import { decodeAssetUrl } from '../../lib/helpers'

@@ -1,4 +1,4 @@
-import { Note } from "phosphor-react"
+import { Note } from "@phosphor-icons/react"
 import { defineField, defineType } from "sanity"
 import { i18nConfig } from "sanity/lib/i18n"
 import { customImage } from "../../lib/custom-image"

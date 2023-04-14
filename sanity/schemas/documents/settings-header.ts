@@ -1,4 +1,4 @@
-import { NavigationArrow } from 'phosphor-react'
+import { NavigationArrow } from '@phosphor-icons/react'
 import { defineType } from 'sanity'
 import { i18nConfig } from 'sanity/lib/i18n'
 

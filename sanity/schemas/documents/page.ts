@@ -1,5 +1,5 @@
 import { defineField, defineType } from "sanity";
-import { Browser } from "phosphor-react";
+import { Browser } from "@phosphor-icons/react";
 
 import { isUniqueAcrossAllDocuments } from "../../lib/isUniqueAcrossAllDocuments";
 import { slugify } from "../../lib/slugify";
@@ -59,12 +59,13 @@ export const page = defineType({
       name: 'modules',
       type: 'array',
       of: [
-        { type: 'start-page-hero' },
 				{ type: 'hero' },
         { type: 'partners' },
         { type: 'blog-posts' },
 				{ type: 'cta' },
 				{ type: 'text-image' },
+				{ type: 'contact-form' },
+				{ type: 'section-reference' },
       ],
       group: 'content'
     },

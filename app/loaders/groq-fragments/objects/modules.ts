@@ -3,28 +3,14 @@ import groq from 'groq'
 import { image, ImageSrc } from './image'
 import { Card, card } from './card'
 import { post } from './post'
-import { Theme } from '~/utils/theme-provider'
 import { Post } from '../documents/blog-post'
 import { PortableTextBlock } from 'sanity'
-
-type StartPageHeroModule = {
-	_type: 'start-page-hero'
-	_key: string
-	title: string
-	subtitle: string
-	bgType: string
-	image: ImageSrc
-	video: {
-		id: string
-		title: string
-	}
-	theme: Theme
-} 
 
 type CTAModule = {
 	_type: 'cta',
 	_key: string
 	title: string
+	subtitle: string
 	cards: Card[]
 }
 
@@ -34,8 +20,8 @@ type HeroModule = {
 	title: string
 	text: string
 	image: ImageSrc
-	theme: Theme
-	contentPlacement: 'left' | 'right'
+	backgroundWidth: 'page' | 'container'
+	contentPlacement: 'left' | 'center' | 'right'
 }
 
 type PartnersModule = {
@@ -47,6 +33,7 @@ type PartnersModule = {
 		_key: string
 		logo: ImageSrc
 		href: string
+    name: string
 	}[]
 }
 
@@ -65,20 +52,36 @@ type TextImageModule = {
 	alignment: 'left' | 'right'
 }
 
-export type Modules = 
-	| StartPageHeroModule
+type ContactFormModule = {
+	_type: 'contact-form'
+	_key: string
+	title: string
+	subtitle: string
+}
+
+export type Modules =
+  | HeroModule
 	| CTAModule
-	| HeroModule
 	| PartnersModule
 	| BlogPostsModule
 	| TextImageModule
+  | ContactFormModule
 
-export const modules = groq`
-  _type == 'start-page-hero' => {
+const actualModules = groq`
+	_type == 'cta' => {
+		_type,
+		_key,
+		title,
+		subtitle,
+		cards[] {
+			${card}
+		}
+	},
+	_type == 'hero' => {
     _type,
     _key,
 		title,
-		subtitle,
+		text,
     bgType,
     image {
       ${image}
@@ -87,24 +90,7 @@ export const modules = groq`
       id,
       title
     },
-		theme
-  },
-	_type == 'cta' => {
-		_type,
-		_key,
-		title,
-		cards[] {
-			${card}
-		}
-	},
-	_type == 'hero' => {
-		_type,
-		_key,
-		title,
-		text,
-		image{
-			${image}
-		},
+    backgroundWidth,
 		theme,
 		contentPlacement
 	},
@@ -119,6 +105,7 @@ export const modules = groq`
 				${image}
 			},
 			href,
+      name,
 		},
 	},
 	_type == 'blog-posts' => {
@@ -144,5 +131,20 @@ export const modules = groq`
 			${image}
     },
 		alignment
+	},
+	_type == 'contact-form' => {
+		_type,
+		_key,
+		title,
+		subtitle,
+	}
+`
+
+export const modules = groq`
+  ${actualModules},
+	_type == 'section-reference' => {
+		...section->content[0] {
+      ${actualModules}
+    }
 	}
 `

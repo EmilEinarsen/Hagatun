@@ -1,4 +1,4 @@
-import { Gear } from 'phosphor-react'
+import { Gear } from '@phosphor-icons/react'
 import { defineField, defineType } from 'sanity'
 import { i18nConfig } from 'sanity/lib/i18n'
 
