@@ -10,19 +10,23 @@ import type { BlogPost } from './groq-fragments/documents/blog-post'
 import type { Page } from './groq-fragments/documents/page'
 import type { Site } from './groq-fragments/documents/site'
 import type { Modules } from './groq-fragments/objects/modules'
-import { Params } from '@remix-run/react'
+import type { Params } from '@remix-run/react'
+
 export type { Page, Site, BlogPost, Modules }
+
+export const getPageQueryAndParams = (params: Params) => {
+	const { lang, slug } = getLangAndSlugFromParams(params)
+  const query = slug === lang ? pageQueryById.replace('$id', queryHomeID) : pageQueryBySlug
+
+  return { query, params: { slug, lang } }
+}
 
 export async function getPage(params: Params) {
 	let page: Page | undefined
-	const { lang, slug } = getLangAndSlugFromParams(params)
+  const args = getPageQueryAndParams(params)
 	
 	try {
-		if(slug === lang) {
-			page = await client.fetch<Page>(pageQueryById.replace('$id', queryHomeID), { lang })
-		} else {
-			page = await client.fetch<Page>(pageQueryBySlug, { slug, lang })
-		}
+		page = await client.fetch<Page>(args.query, args.params)
 	} catch (error: unknown) {
 		if(
 			error &&
@@ -33,7 +37,7 @@ export async function getPage(params: Params) {
 	}
 	
 	page && assert(
-		page.lang === lang, 
+		page.lang === args.params.lang, 
 		`pathname language didn't match the page results language`
 	)
 	
@@ -41,7 +45,7 @@ export async function getPage(params: Params) {
 		page: page ? Object.assign(page, {
 			images: buildPageImages(page)
 		}) : undefined,
-		lang,
+		lang: args.params.lang,
 		notFound: !page
 	}
 }
@@ -49,7 +53,7 @@ export async function getPage(params: Params) {
 export async function getSite(params: Params) {
 	const { lang } = getLangAndSlugFromParams(params)
 
-	const site = await client.fetch<Site>(siteQuery, { lang })
+	const site: Site = await client.fetch(siteQuery, { lang })
 	assert(site, 'site was undefined')
 	
 	return { 

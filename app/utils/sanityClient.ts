@@ -1,4 +1,5 @@
-import createSanityClient from "@sanity/client";
+import { createClient } from "@sanity/client";
+import { definePreview } from "@sanity/preview-kit";
 import { projectDetails } from "sanity/projectDetails";
 
 import { IS_PROD } from "~/utils/constants";
@@ -10,4 +11,5 @@ const options = {
 	useCdn: IS_PROD,
 }
 
-export const client = createSanityClient(options)
+export const client = createClient(options)
+export const usePreview = definePreview(options);
