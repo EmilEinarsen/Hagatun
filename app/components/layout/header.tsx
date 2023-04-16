@@ -49,7 +49,7 @@ export const Header = () => {
           >
             {item.title} <CaretDown className='ml-3 group-open:rotate-180' />
           </summary>
-          <ul className='right-0 py-2 max-sm:px-2 sm:bg-white sm:absolute'>
+          <ul className='right-0 py-2 max-sm:px-2 sm:bg-white sm:absolute sm:shadow-lg'>
             {item.items?.map(subItem => 
               subItem.title !== 'menu' ? 
                 <li 
