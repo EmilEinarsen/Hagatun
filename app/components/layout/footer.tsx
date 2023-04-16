@@ -34,18 +34,18 @@ export const Footer = () => {
       <div className="max-w-6xl px-4 mx-auto sm:px-6">
 
         {/* Top area: Blocks */}
-        <div className="grid gap-8 py-8 border-t border-gray-200 sm:grid-cols-12 md:py-12">
+        <div className="grid grid-cols-12 gap-8 py-8 border-t border-gray-200 md:py-12">
 
           {site?.footer.blocks?.map(block => 
             block._type === 'bio' ? (
-              <div key={block._key} className="sm:col-span-12 lg:col-span-4">
+              <div key={block._key} className="col-span-12 sm:col-span-3">
                 <Logo titleType='none' />
-                <p className='mt-4 text-sm max-w-prose'>{block.bio}</p>
+                {/* <p className='mt-4 text-sm max-w-prose'>{block.bio}</p> */}
               </div>
             )
 
             : block._type === 'menu' ? (
-              <div key={block._key} className="sm:col-span-6 md:col-span-3 lg:col-span-3">
+              <div key={block._key} className="col-span-6 sm:col-span-3">
                 <h3 className="mb-2 font-medium text-gray-800">{block.title}</h3>
                 <ul className="mt-4">
                   {block.items?.map(subItem => 
@@ -63,7 +63,7 @@ export const Footer = () => {
             )
 
             : block._type === 'information' ?
-              <div className="sm:col-span-6 md:col-span-3 lg:col-span-2">
+              <div className="col-span-12 sm:col-span-3">
                 <h3 className="mb-2 font-medium text-gray-800">{T['contact information'][lang]?.toCapitalize()}</h3>
                 {block.offices?.map(office =>
                   <React.Fragment key={office._key}>
