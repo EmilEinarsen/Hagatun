@@ -8,7 +8,8 @@ import type { ModuleProps } from '.'
 const CTA = ({ data }: ModuleProps<'cta'>) => {
 	
 	return (
-		<section className='bg-blue-50' id="cta">
+		<section className='relative bg-blue-50'>
+      <span id="cta" className='absolute -top-20' />
       <div className='max-w-6xl py-16 mx-auto sm:py-24 sm:px-6'>
         <div className='mx-auto mb-16 prose prose-xl text-center sm:mb-24 prose-gray'>
           <h2>{data.title}</h2>

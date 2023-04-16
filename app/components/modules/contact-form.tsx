@@ -72,7 +72,7 @@ const ContactForm = ({ data }: ModuleProps<'contact-form'>) => {
   const feedback = state === 'success' || state === 'error' ? FORM_FEEDBACK[state] : undefined
 
   return (
-    <section id="contact-form">
+    <section>
       <div className='max-w-6xl px-4 py-24 mx-auto max-sm:py-10 sm:px-6' id="contact-info">
         <div className='flex flex-wrap justify-around gap-10'>
           {getContactInfo(site.company).map(info => 
@@ -86,7 +86,8 @@ const ContactForm = ({ data }: ModuleProps<'contact-form'>) => {
           )}
         </div>
       </div>
-      <div className="bg-blue-50">
+      <div className="relative bg-blue-50">
+        <span id="contact-form" className='absolute -top-20' />
         <div className='relative max-w-screen-sm px-4 py-24 mx-auto sm:py-16 sm:px-6'>
           <h2 className='mb-4 text-4xl font-extrabold tracking-tight text-center text-gray-900'>{data.title}</h2>
           <p className='mb-8 font-light text-center lg:mb-16 sm:text-xl'>{data.subtitle}</p>
