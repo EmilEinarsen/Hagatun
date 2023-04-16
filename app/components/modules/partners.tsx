@@ -9,7 +9,7 @@ const Partners = ({ data }: ModuleProps<'partners'>) => {
 		<section className='bg-blue-900'>
       <div className='max-w-6xl px-4 py-24 mx-auto md:px-6'>
         <div className='items-center gap-2 md:flex'>
-          <div className='prose prose-lg prose-invert prose-h2:max-w-sm max-md:mx-auto max-md:text-center max-md:mb-12'>
+          <div className='prose prose-lg prose-invert prose-h2:max-w-sm prose-h2:mx-auto max-md:mx-auto max-md:text-center max-md:mb-12'>
             <h2>{data.title}</h2>
             <p>{data.text}</p>
           </div>
