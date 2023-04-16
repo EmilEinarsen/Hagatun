@@ -1,6 +1,22 @@
 import { ListItemBuilder, StructureBuilder } from 'sanity/desk'
 import { i18nConfig } from 'sanity/lib/i18n'
+import Iframe from 'sanity-plugin-iframe-pane'
+
 import { PageIcon } from '../../schemas/documents/page'
+
+const createPageView = (S: StructureBuilder) => (id: string) => 
+  S.document()
+  .documentId(id)
+  .schemaType('page')
+  .views([
+    S.view.form(),
+    S.view
+      .component(Iframe)
+      .options({
+        url: `http://localhost:3000/resource/preview`,
+      })
+      .title('Preview'),
+  ])
 
 export const pagesMenu = (S: StructureBuilder): ListItemBuilder =>
 	S.listItem()
@@ -22,11 +38,7 @@ export const pagesMenu = (S: StructureBuilder): ListItemBuilder =>
 							*[_type == "generalSettings"][0].error._ref,
 						]) && !(_id in path("drafts.**"))`
 					)
-					.child(async id => {
-						return S.document()
-							.documentId(id)
-							.schemaType('page')
-					})
+					.child(createPageView(S))
 					.canHandleIntent(
 						(intent, { type }) =>
 							['create', 'edit'].includes(intent) && type === 'page'
@@ -44,11 +56,7 @@ export const pagesMenu = (S: StructureBuilder): ListItemBuilder =>
 								*[_type == "generalSettings"][0].error._ref,
 							]) && !(_id in path("drafts.**"))`
 						)
-						.child(documentId =>
-							S.document()
-								.documentId(documentId)
-								.schemaType('page')
-						)
+            .child(createPageView(S))
 						.canHandleIntent(
 							(intent, { type }) =>
 								['create', 'edit'].includes(intent) && type === 'page'
@@ -59,11 +67,7 @@ export const pagesMenu = (S: StructureBuilder): ListItemBuilder =>
           .schemaType('page')
           .child(S.documentTypeList('page')
 						.title('All Pages')
-						.child(documentId =>
-							S.document()
-								.documentId(documentId)
-								.schemaType('page')
-						)
+            .child(createPageView(S))
 						.canHandleIntent(
 							(intent, { type }) =>
 								['create', 'edit'].includes(intent) && type === 'page'
