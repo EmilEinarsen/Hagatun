@@ -8,6 +8,7 @@ import {
 } from "@remix-run/react";
 import { LinksFunction, MetaFunction } from "@remix-run/node";
 import { DynamicLinks } from 'remix-utils'
+import { Analytics } from '@vercel/analytics/react';
 
 import { useRouteData } from "./hooks/useRouteData";
 
@@ -28,7 +29,7 @@ export const meta: MetaFunction = () => {
 }
 
 
-function Root({ title }: {title?: string}) {
+export default function Component({ title }: {title?: string}) {
 	const { lang } = useRouteData()
 	
   return (
@@ -43,11 +44,10 @@ function Root({ title }: {title?: string}) {
         <Outlet />
         <ScrollRestoration />
         <Scripts />
+        <Analytics />
         {process.env.NODE_ENV === "development" && <LiveReload />}
         <div id="portals" className="portals" />
       </body>
     </html>
   );
 }
-
-export default Root
