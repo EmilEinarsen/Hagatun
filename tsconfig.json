@@ -17,8 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./app/*"]
-    },
-		"outDir": "dist"
+    }
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
