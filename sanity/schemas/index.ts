@@ -1,5 +1,5 @@
-import { Star } from '@phosphor-icons/react';
-import { hero } from 'sanity-page-builder'
+import { Star, Textbox } from '@phosphor-icons/react';
+import { hero, textImage } from 'sanity-page-builder'
 
 import { blogPost } from "./documents/blog-post";
 import { menu } from "./documents/menu";
@@ -13,7 +13,6 @@ import { blogPosts } from "./modules/blog-posts";
 import { contactForm } from './modules/contact-form';
 import { cta } from "./modules/cta";
 import { partners } from "./modules/partners";
-import { textImage } from "./modules/text-image";
 import { author } from "./objects/author";
 import { blockContent } from "./objects/blockContent";
 import { card } from "./objects/card";
@@ -41,7 +40,7 @@ export const schemaTypes = [
 	cta,
 	{ ...hero, icon: Star, fields: hero.fields.filter(item => item.name !== 'theme') },
 	partners,
-	textImage,
+	{ ...textImage, icon: Textbox },
   contactForm,
 
 	/* Object types */

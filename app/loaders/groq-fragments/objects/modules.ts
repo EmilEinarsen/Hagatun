@@ -48,7 +48,7 @@ type TextImageModule = {
 	_type: 'text-image'
 	_key: string
 	body: PortableTextBlock
-	photo: ImageSrc
+	image: ImageSrc
 	alignment: 'left' | 'right'
 }
 
@@ -127,7 +127,7 @@ const actualModules = groq`
 		_type,
 		_key,
 		body,
-    photo {
+    image {
 			${image}
     },
 		alignment
