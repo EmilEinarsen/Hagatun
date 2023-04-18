@@ -4,8 +4,8 @@ import { RouteData } from ".";
 export const dynamicLinks = ({ data }: { data?: RouteData }): LinkDescriptor[] => {
 	if(!data?.site) return []
 	
-	const siteFavicon = data.site.seo?.favicon || '/favicon.svg'
-  const siteFaviconLegacy = data.site.seo?.faviconLegacy || '/favicon.ico'
+	const siteFavicon = data.site.seo?.favicon?.src || '/favicon.svg'
+  const siteFaviconLegacy = data.site.seo?.faviconLegacy?.src || '/favicon.ico'
 
   /* const heroImage = (() => {
     const module = data.page?.modules?.[0]
@@ -15,7 +15,7 @@ export const dynamicLinks = ({ data }: { data?: RouteData }): LinkDescriptor[] =
   
 	return <LinkDescriptor[]>[
 		{ rel: 'icon', href: siteFaviconLegacy, size: 'any' },
-		{ rel: 'icon', type: 'image/svg+xml', href: typeof siteFavicon === 'string' ? siteFavicon : siteFavicon.src },
+		{ rel: 'icon', type: 'image/svg+xml', href: siteFavicon },
 		{ rel: 'mask-icon', href: siteFavicon, color: '#000000' },
 		...data.site.images.sitTouchIcon ? 
 			[{ rel: 'apple-touch-icon', href: data.site.images.sitTouchIcon }] 
