@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from 'react'
 
 import { useRouteData } from '~/hooks/useRouteData'
 import { Company } from '~/loaders/groq-fragments/documents/site'
-import { ActionData } from '~/routes/__app/($lang)/$'
+import { ActionData } from '~/routes/_app.($lang).$'
 import { clsx } from '~/utils/utils'
 import { ModuleProps } from '.'
 import { Alert } from '../core/alert'
