@@ -3,8 +3,7 @@ module.exports = {
 	watchPaths: ['sanity'],
   // appDirectory: "app",
   // assetsBuildDirectory: "public/build",
-  // serverBuildPath: "build/index.js",
-  // publicPath: "/build/",
+  // serverBuildPath: "build/index.js"
   future: {
     unstable_tailwind: true,
     v2_routeConvention: true,
@@ -12,4 +11,13 @@ module.exports = {
     v2_errorBoundary: true,
     v2_normalizeFormMethod: true
   },
+
+  // serverBuildTarget vercel
+  // https://remix.run/docs/en/1.15.0/pages/v2#serverbuildtarget
+  publicPath: "/build/",
+  serverBuildPath: "api/index.js",
+  serverMainFields: ['main', 'module'],
+  serverModuleFormat: "cjs",
+  serverPlatform: "node",
+  serverMinify: false,
 };
