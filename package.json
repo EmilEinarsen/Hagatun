@@ -3,8 +3,10 @@
   "sideEffects": false,
   "scripts": {
     "build": "remix build",
-    "dev": "remix dev",
-    "start": "remix-serve build",
+    "start": "remix-serve api",
+    "dev": "run-p dev:*",
+    "dev:build": "cross-env NODE_ENV=development remix dev",
+    "dev:serve": "cross-env NODE_ENV=development nodemon --watch api node_modules/.bin/remix-serve api",
     "tsc": "tsc"
   },
   "dependencies": {

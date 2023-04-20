@@ -5,6 +5,7 @@ module.exports = {
   // assetsBuildDirectory: "public/build",
   // serverBuildPath: "build/index.js"
   future: {
+    unstable_dev: true,
     unstable_tailwind: true,
     v2_routeConvention: true,
     v2_meta: true,

@@ -1,5 +1,5 @@
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { CaretDown, List, X } from '@phosphor-icons/react';
 import * as Drawer from '@accessible/drawer'
 
@@ -29,7 +29,10 @@ export const Header = () => {
   const open = () => setIsOpen(true)
   const close = () => setIsOpen(false)
 
+  const path = useRef(pathname)
   useEffect(() => {
+    if(pathname === path.current) return
+    path.current = pathname
     close()
   }, [pathname])
 
