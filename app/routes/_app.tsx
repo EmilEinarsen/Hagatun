@@ -1,6 +1,5 @@
-import { Link, Outlet, useCatch } from "@remix-run/react";
+import { isRouteErrorResponse, Link, Outlet, useRouteError } from "@remix-run/react";
 import { LoaderArgs, LinksFunction } from "@remix-run/node";
-import { SmileySad } from "@phosphor-icons/react";
 
 import Layout from "~/components/layout/layout";
 import { getSite } from "~/loaders";
@@ -33,46 +32,32 @@ export default function App() {
   );
 }
 
-export function CatchBoundary() {
-	const { site } = useRouteData()
-  const caught = useCatch();
-  console.error(caught);
+export function ErrorBoundary() {
+  const { site } = useRouteData()
+  const error = useRouteError();
+
+  const errorInfo: any = error
 
   return (
-		<Layout>
-			<div style={{ height: '70vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-				<div style={{ whiteSpace: 'pre-wrap', fontWeight: 'bold', textAlign: 'center', maxWidth: 'var(--size-content-2)' }}>
-					<h1 style={{ maxInlineSize: 'unset', fontSize: '10rem' }}>404</h1>
-					<h2 style={{ maxInlineSize: 'unset', marginBlockEnd: '2ch' }}>Page Not Found</h2>
-					<p>
-						The Page you are looking for doesn't exist or an other error occured. Go to <Link to={site.home.slug}>Home Page</Link>.
-					</p>
-				</div>
-			</div>
+    <Layout>
+      <div className='max-w-6xl py-16 mx-auto prose prose-xl text-center prose-h1:text-9xl prose-h1:mb-4 sm:py-24 sm:px-6'>
+        {isRouteErrorResponse(error) ? (
+          <div className='grid justify-center'>
+            <h1>404</h1>
+            <h2>Page Not Found</h2>
+            <p>
+              The page you are looking for doesn't exist or an other error occured. Go to <Link to={site.home.slug}>Home Page</Link>.
+            </p>
+          </div>
+        ) : (
+          <>
+            <pre>
+              {!!(errorInfo.cause || errorInfo.name)&&`${errorInfo.cause || errorInfo.name}: `}{errorInfo.message}
+              {!!Object.keys(errorInfo).length && JSON.stringify(errorInfo, null, 2)}
+            </pre>
+          </>
+        )}
+      </div>
     </Layout>
   );
 }
-
-export function ErrorBoundary({ error }: { error: Error }) {
-  console.error('ErrorBoundary', error);
-
-  return (
-		<html lang="en" style={{ height: '100%' }}>
-			<head>
-				<title>{error.name||''}</title>
-			</head>
-			<body>
-				<div style={{ height: '100vh', display: 'flex' }}>
-					<div style={{ alignSelf: 'center', margin: '0 auto', fontSize: '1rem', whiteSpace: 'pre-wrap', fontWeight: 'bold', textAlign: 'center' }}>
-						<SmileySad weight="thin" size="7rem" />
-						<pre style={{ fontSize: '1rem', whiteSpace: 'pre-wrap', fontWeight: 'bold' }}>
-							{!!(error.cause || error.name)&&`${error.cause || error.name}: `}{error.message}
-							{!!Object.keys(error).length && JSON.stringify(error, null, 2)}
-						</pre>
-					</div>
-				</div>
-			</body>
-		</html>
-  );
-}
-
