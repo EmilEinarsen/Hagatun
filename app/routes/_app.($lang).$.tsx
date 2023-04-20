@@ -3,23 +3,16 @@ import { PreviewSuspense } from "@sanity/preview-kit";
 
 import { getPage, getPageQueryAndParams, getSite } from "~/loaders";
 import { metadata } from "~/loaders/metadata";
-import { dynamicLinks } from "~/loaders/dynamicLinks";
 import { useRouteData } from "~/hooks/useRouteData";
 import { merge } from "~/utils/utils";
 import { getSession } from "~/sessions";
 import { Page } from "~/components/app/Page";
 import { PagePreview } from "~/components/app/PagePreview";
 
-import type { ActionArgs, LoaderArgs, MetaFunction } from "@remix-run/node";
+import type { ActionArgs, LoaderArgs, V2_MetaFunction } from "@remix-run/node";
 
-export const meta: MetaFunction = ({ data }) => {
-	return {
-		...metadata(data)
-	}
-}
-
-export const handle = { 
-	dynamicLinks
+export const meta: V2_MetaFunction = ({ data, matches }) => {
+	return metadata(data, matches)
 }
 
 export const loader = async ({ request, params }: LoaderArgs) => {

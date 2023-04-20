@@ -6,7 +6,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import { LinksFunction, MetaFunction } from "@remix-run/node";
+import { LinksFunction } from "@remix-run/node";
 import { DynamicLinks } from 'remix-utils'
 import { Analytics } from '@vercel/analytics/react';
 
@@ -19,23 +19,19 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const meta: MetaFunction = () => {
-	return { 
-		viewport: 'width=device-width, initial-scale=1',
-		charset: "utf-8",
-		'x-ua-compatible': 'ie=edge',
-		'format-detection': 'telephone=no',
-	}
-}
-
-
-export default function Component({ title }: {title?: string}) {
+export default function Component() {
 	const { lang } = useRouteData()
 	
   return (
     <html lang={lang}>
       <head>
-        {title && <title>{title}</title>}
+        <meta charSet="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1"
+        />
+        <meta httpEquiv="x-ua-compatible" content='ie=edge' />
+        <meta name="format-detection" content='telephone=no' />
         <Meta />
         <Links />
         <DynamicLinks />
