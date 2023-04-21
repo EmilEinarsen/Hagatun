@@ -1,20 +1,12 @@
-import { useLoaderData } from "@remix-run/react";
-import { LoaderArgs, MetaFunction } from "@remix-run/node";
+import { LoaderArgs, V2_MetaFunction } from "@remix-run/node";
 
 import { merge } from "~/utils/utils";
 import { getBlogPost, getSite } from "~/loaders";
 import { metadata } from "~/loaders/metadata";
-import { dynamicLinks } from "~/loaders/dynamicLinks";
 import { useRouteData } from "~/hooks/useRouteData";
 
-export const meta: MetaFunction = ({ data }) => {
-	return {
-		...metadata(data)
-	}
-}
-
-export const handle = { 
-	dynamicLinks
+export const meta: V2_MetaFunction = ({ data, matches }) => {
+	return metadata(data, matches)
 }
 
 export const loader = async ({ params }: LoaderArgs) => {
