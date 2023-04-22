@@ -1,5 +1,5 @@
 import { LinkSimpleHorizontal } from '@phosphor-icons/react'
-import { defineField, defineType } from 'sanity';
+import { defineType } from 'sanity';
 import { i18nConfig } from 'sanity/lib/i18n';
 
 export const navPage = defineType({

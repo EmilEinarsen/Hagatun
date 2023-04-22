@@ -1,6 +1,6 @@
 import groq from "groq";
+import { imageQuery } from 'sanity-page-builder'
 
-import { image } from "./image";
 import { referenceBlogPostWithSlug } from "./links";
 
 export const post = groq`
@@ -15,6 +15,6 @@ export const post = groq`
 	excerpt,
 	"authorName": author->name,
 	"image": mainImage {
-		${image}
+		${imageQuery}
 	},
 `

@@ -1,9 +1,9 @@
 import { defineField, defineType } from "sanity";
 import { Browser } from "@phosphor-icons/react";
+import { image } from 'sanity-page-builder'
 
 import { isUniqueAcrossAllDocuments } from "../../lib/isUniqueAcrossAllDocuments";
 import { slugify } from "../../lib/slugify";
-import { customImage } from "../../lib/custom-image";
 import { i18nConfig } from "sanity/lib/i18n";
 
 export const PageIcon = Browser
@@ -69,11 +69,12 @@ export const page = defineType({
       ],
       group: 'content'
     },
-		customImage({
+		{
+      ...image,
 			name: 'thumbnail',
 			title: 'Thumbnail',
       group: 'thumbnail'
-		}),
+		},
 		{
 			title: 'Overlay header with transparency?',
 			name: 'hasTransparentHeader',

@@ -1,9 +1,9 @@
 import groq from 'groq'
 import { i18nConfig } from '../../../../sanity/lib/i18n'
+import { ImageObject, imageQuery } from 'sanity-page-builder'
 
 import { ReferenceWithSlug, referenceWithSlug } from '../objects/links'
 import { filterById, filterSavedPages } from '../utils/filters'
-import { image, ImageSrc } from '../objects/image'
 import { Header, header } from './header'
 import { Footer, footer } from './footer'
 
@@ -48,10 +48,10 @@ export type Site = {
 		metaDesc: string,
 		shareTitle: string,
 		shareDesc: string,
-		favicon: ImageSrc | null,
-		faviconLegacy: ImageSrc | null,
-		shareGraphic: ImageSrc | null,
-		touchIcon: ImageSrc | null
+		favicon: ImageObject | null,
+		faviconLegacy: ImageObject | null,
+		shareGraphic: ImageObject | null,
+		touchIcon: ImageObject | null
 	}
 } | null | undefined
 
@@ -99,16 +99,16 @@ export const site = groq`
 		shareTitle,
 		shareDesc,
 		shareGraphic {
-			${image}
+			${imageQuery}
 		},
 		favicon {
-			${image}
+			${imageQuery}
 		},
 		faviconLegacy {
-			${image}
+			${imageQuery}
 		},
 		touchIcon {
-			${image}
+			${imageQuery}
 		},
 	}
 `

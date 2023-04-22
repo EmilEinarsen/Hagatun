@@ -1,7 +1,7 @@
 import groq from 'groq'
+import { imageQuery } from 'sanity-page-builder'
 
 import { referenceWithSlug } from "./links";
-import { image } from "./image";
 
 export const portableTextContent = groq`
   ...,
@@ -17,6 +17,6 @@ export const portableTextContent = groq`
     }
   },
   _type == "photo" => {
-    ${image}
+    ${imageQuery}
   }
 `

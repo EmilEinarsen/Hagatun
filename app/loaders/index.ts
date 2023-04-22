@@ -35,8 +35,6 @@ export async function getPage(params: Params) {
 			(error as any).code === 'ECONNRESET'
 		) throw Error('Connection request was abruptly closed by peer', { cause: 500 })
 	}
-
-  console.log(JSON.stringify(page, null, 2))
 	
 	page && assert(
 		page.lang === args.params.lang, 

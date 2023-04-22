@@ -1,10 +1,9 @@
 import groq from 'groq'
+import { Hero, heroQuery, ImageObject, imageQuery, TextImage, textImageQuery } from 'sanity-page-builder'
 
-import { image, ImageSrc } from './image'
 import { Card, card } from './card'
 import { post } from './post'
 import { Post } from '../documents/blog-post'
-import { PortableTextBlock } from 'sanity'
 
 type CTAModule = {
 	_type: 'cta',
@@ -14,16 +13,6 @@ type CTAModule = {
 	cards: Card[]
 }
 
-type HeroModule = {
-	_type: 'hero'
-	_key: string
-	title: string
-	text: string
-	image: ImageSrc
-	backgroundWidth: 'page' | 'container'
-	contentPlacement: 'left' | 'center' | 'right'
-}
-
 type PartnersModule = {
 	_type: 'partners'
 	_key: string
@@ -31,7 +20,7 @@ type PartnersModule = {
 	text: string
 	partnerLogos: {
 		_key: string
-		logo: ImageSrc
+		logo: ImageObject
 		href: string
     name: string
 	}[]
@@ -44,14 +33,6 @@ type BlogPostsModule = {
 	posts: Post[]
 }
 
-type TextImageModule = {
-	_type: 'text-image'
-	_key: string
-	body: PortableTextBlock
-	image: ImageSrc
-	alignment: 'left' | 'right'
-}
-
 type ContactFormModule = {
 	_type: 'contact-form'
 	_key: string
@@ -60,11 +41,11 @@ type ContactFormModule = {
 }
 
 export type Modules =
-  | HeroModule
+  | Hero
 	| CTAModule
 	| PartnersModule
 	| BlogPostsModule
-	| TextImageModule
+	| TextImage
   | ContactFormModule
 
 const actualModules = groq`
@@ -78,21 +59,7 @@ const actualModules = groq`
 		}
 	},
 	_type == 'hero' => {
-    _type,
-    _key,
-		title,
-		text,
-    bgType,
-    image {
-      ${image}
-    },
-    video{
-      id,
-      title
-    },
-    backgroundWidth,
-		theme,
-		contentPlacement
+    ${heroQuery}
 	},
 	_type == 'partners' => {
 		_type,
@@ -102,7 +69,7 @@ const actualModules = groq`
 		partnerLogos[]{
 			_key,
 			logo{
-				${image}
+				${imageQuery}
 			},
 			href,
       name,
@@ -124,13 +91,7 @@ const actualModules = groq`
 		}
 	},
 	_type == 'text-image' => {
-		_type,
-		_key,
-		body,
-    image {
-			${image}
-    },
-		alignment
+		${textImageQuery}
 	},
 	_type == 'contact-form' => {
 		_type,

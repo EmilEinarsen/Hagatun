@@ -1,12 +1,12 @@
 import { SanityImage } from "sanity-image"
 import { SanityImageProps } from "sanity-image/dist/types"
+import { ImageObject } from "sanity-page-builder"
 import { projectDetails } from "sanity/projectDetails"
-import { ImageSrc } from "~/loaders/groq-fragments/objects/image"
 import { clsx } from "~/utils/utils"
 
 const details = projectDetails()
 
-export const getImageProps = (image: ImageSrc) => ({
+export const getImageProps = (image: ImageObject) => ({
   id: image.id, 
   baseUrl: `https://cdn.sanity.io/images/${details.projectId}/${details.dataset}/`,
   mode: 'cover',
@@ -19,7 +19,7 @@ type ImageProps = Omit<
   SanityImageProps & React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>,
   "baseUrl" | "dataset" | "projectId" | 'preview' | 'crop' | 'hotspot' | 'id'
 > & {
-  image: ImageSrc
+  image: ImageObject
   background?: boolean
 }
 

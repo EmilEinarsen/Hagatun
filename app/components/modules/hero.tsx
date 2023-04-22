@@ -1,22 +1,21 @@
 import { Link, useLocation } from '@remix-run/react';
 import { ArrowRight } from '@phosphor-icons/react';
 
-import { useRouteData } from '~/hooks/useRouteData';
 import { Image } from '../core/image';
-import { clsx } from '~/utils/utils';
+import { assert, clsx } from '~/utils/utils';
 
 import type { ModuleProps } from '.';
 
 export const heroHeight = 650
 
 function Hero({ data, index }: ModuleProps<'hero'>) {
+  assert(data.bgType !== 'video', 'Unimplemented video background for hero module')
   const isStartPageHero = useLocation().pathname === '/' && !index
-	const { site } = useRouteData()
 
   const justifyContent = data.contentPlacement === 'right' ? 'sm:justify-end' : data.contentPlacement === 'center' ? 'sm:justify-center' : 'sm:justify-start'
   const prose = 'prose prose-lg prose-gray prose-p:text-md prose-p:text-gray-500' + (isStartPageHero ? ' lg:prose-xl' : '')
 
-  const image = (
+  const image = data.image && (
     <Image
       image={data.image}
       loading={isStartPageHero ? 'eager' : 'lazy'}

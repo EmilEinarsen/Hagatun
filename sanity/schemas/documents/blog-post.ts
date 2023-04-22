@@ -1,7 +1,7 @@
 import { Note } from "@phosphor-icons/react"
 import { defineField, defineType } from "sanity"
+import { image } from 'sanity-page-builder'
 import { i18nConfig } from "sanity/lib/i18n"
-import { customImage } from "../../lib/custom-image"
 import { isUniqueAcrossAllDocuments } from "../../lib/isUniqueAcrossAllDocuments"
 import { slugify } from "../../lib/slugify"
 
@@ -60,24 +60,26 @@ export const blogPost = defineType({
 			],
 			group: ['settings', 'content']
 		}),
-    customImage({
+    {
+      ...image,
       name: 'mainImage',
       title: 'Main image',
 			validation: Rule => Rule.required(),
       group: 'content'
-    }),
+    },
     {
       name: 'body',
       title: 'Body',
       type: 'blockContent',
       group: 'content'
     },
-		customImage({
+    {
+      ...image,
 			name: 'thumbnail',
 			title: 'Thumbnail',
 			validation: Rule => Rule.required(),
       group: 'thumbnail'
-		}),
+    },
     {
       name: "excerpt",
       title: "Excerpt",

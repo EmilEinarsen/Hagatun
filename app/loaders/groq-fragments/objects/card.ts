@@ -1,6 +1,6 @@
 import groq from 'groq'
+import { ImageObject, imageQuery } from 'sanity-page-builder'
 
-import { image, ImageSrc } from './image'
 import { ReferenceWithSlug, referenceWithSlug } from './links'
 
 export type Card = {
@@ -9,7 +9,7 @@ export type Card = {
 	title: string
 	subtitle: string
 	text: string
-	thumbnail: ImageSrc
+	thumbnail: ImageObject
 	href: ReferenceWithSlug | null;
 }
 
@@ -19,7 +19,7 @@ export const card = groq`
 	title,
 	subtitle,
 	thumbnail{
-		${image}
+		${imageQuery}
 	},
 	text,
 	"href": link->{

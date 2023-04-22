@@ -1,4 +1,5 @@
 import groq from "groq";
+import { ImageObject } from 'sanity-page-builder'
 
 import { Header, header } from './header'
 import { Footer, footer } from './footer'
@@ -6,7 +7,6 @@ import { referenceWithSlug } from "../objects/links";
 import { filterById } from "../utils";
 import { post } from '../objects/post'
 import { PortableTextBlock } from "sanity";
-import { ImageSrc } from "../objects/image";
 import { Locale } from "sanity/lib/i18n";
 
 export type Post = {
@@ -22,7 +22,7 @@ export type Post = {
 	body: PortableTextBlock
 	authorName: string
 	excerpt?: string
-	image?: ImageSrc
+	image?: ImageObject
 }
 
 export type BlogPost = {
