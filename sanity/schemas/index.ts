@@ -38,7 +38,7 @@ export const schemaTypes = [
 	/* Module types */
 	blogPosts,
 	cta,
-	{ ...hero, icon: Star, fields: hero.fields.filter(item => item.name !== 'theme') },
+	{ ...hero, icon: Star },
 	partners,
 	{ ...textImage, icon: Textbox },
   contactForm,
