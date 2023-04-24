@@ -1,8 +1,8 @@
-import { NavigationArrow } from '@phosphor-icons/react'
+import { QueueListIcon } from '@heroicons/react/24/outline'
 import { defineType } from 'sanity'
 import { i18nConfig } from 'sanity/lib/i18n'
 
-export const HeaderSettingsIcon = NavigationArrow
+export const HeaderSettingsIcon = QueueListIcon
 
 export const settingsHeader = defineType({
   title: 'Header Settings',

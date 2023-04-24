@@ -1,23 +1,20 @@
 import React from 'react'
 
 import {
-	FacebookLogo,
-	InstagramLogo,
-	TwitterLogo,
-	LinkedinLogo,
-} from '@phosphor-icons/react'
+	StopIcon
+} from '@heroicons/react/24/outline'
 import { defineType } from 'sanity'
 
 export const getIcon = (icon: string) => {
   switch (icon) {
     case 'Facebook':
-      return { Icon: FacebookLogo, color: '#1877F2' }
+      return { Icon: StopIcon, color: '#1877F2' }
     case 'Instagram':
-      return { Icon: InstagramLogo, color: '#EC3397' }
+      return { Icon: StopIcon, color: '#EC3397' }
     case 'Twitter':
-      return { Icon: TwitterLogo, color: '#1DA1F2' }
+      return { Icon: StopIcon, color: '#1DA1F2' }
     case 'Likedin':
-      return { Icon: LinkedinLogo, color: '#0A66C2' }
+      return { Icon: StopIcon, color: '#0A66C2' }
     default:
       return { Icon: null, color: '' }
   }

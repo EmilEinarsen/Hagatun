@@ -1,8 +1,8 @@
-import { Gear } from '@phosphor-icons/react'
+import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 import { defineField, defineType } from 'sanity'
 import { i18nConfig } from 'sanity/lib/i18n'
 
-export const GeneralSettingsIcon = Gear
+export const GeneralSettingsIcon = Cog6ToothIcon
 
 export const settingsGeneral = defineType({
   title: 'General Settings',

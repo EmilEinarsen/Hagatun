@@ -1,16 +1,8 @@
-import { FacebookLogo, InstagramLogo, LinkedinLogo, TwitterLogo } from '@phosphor-icons/react'
 import { Link } from '@remix-run/react'
 import React from 'react'
 
 import { Logo } from '~/components/app/Logo'
 import { useRouteData } from '~/hooks/useRouteData'
-
-const ICON = {
-	Facebook: <FacebookLogo />,
-	Instagram: <InstagramLogo />,
-	Twitter: <TwitterLogo />,
-	LinkedIn: <LinkedinLogo />,
-} as const
 
 const T = {
 	'contact information': {

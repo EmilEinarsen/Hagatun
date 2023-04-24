@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@accessible/drawer": "^3.0.2",
-    "@phosphor-icons/react": "^2.0.8",
+    "@heroicons/react": "^2.0.17",
     "@portabletext/react": "^2.0.2",
     "@remix-run/node": "^1.15.0",
     "@remix-run/react": "^1.15.0",

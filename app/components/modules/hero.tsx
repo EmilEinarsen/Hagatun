@@ -1,5 +1,5 @@
 import { Link, useLocation } from '@remix-run/react';
-import { ArrowRight } from '@phosphor-icons/react';
+import { ArrowLongRightIcon } from '@heroicons/react/24/solid'
 
 import { Image } from '../core/image';
 import { assert, clsx } from '~/utils/utils';
@@ -35,7 +35,7 @@ function Hero({ data, index }: ModuleProps<'hero'>) {
         <div className='mt-12'>
           <div className='flex flex-wrap gap-2'>
             <Link to='#contact-form' className="text-white bg-blue-600 btn hover:bg-blue-700">Kontakta oss</Link>
-            <Link to='#cta' className="btn">Våra tjänster <ArrowRight className='inline w-4 h-4 ml-2' /></Link>
+            <Link to='#cta' className="btn">Våra tjänster <ArrowLongRightIcon className='inline w-4 h-4 ml-2' /></Link>
           </div>
         </div>
       )}

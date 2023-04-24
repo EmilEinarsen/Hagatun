@@ -1,11 +1,11 @@
-import { SquaresFour } from '@phosphor-icons/react'
+import { Squares2X2Icon } from '@heroicons/react/24/outline'
 import { defineType } from 'sanity'
 
 export const cta =  defineType({
 	type: 'object',
 	name: 'cta',
 	title: 'Call to action',
-  icon: SquaresFour,
+  icon: Squares2X2Icon,
 	fields: [
 		{
 			type: 'string',

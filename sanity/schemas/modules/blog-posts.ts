@@ -1,11 +1,11 @@
-import { Cards } from "@phosphor-icons/react";
+import { CubeIcon } from "@heroicons/react/24/outline";
 import { defineType } from "sanity";
 
 export const blogPosts = defineType({
 	type: 'object',
 	name: 'blog-posts',
 	title: 'Blog Posts',
-	icon: Cards,
+	icon: CubeIcon,
 	fields: [
 		{
 			type: 'string',

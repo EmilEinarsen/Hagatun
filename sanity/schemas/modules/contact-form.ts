@@ -1,11 +1,11 @@
-import { Envelope } from '@phosphor-icons/react'
+import { EnvelopeIcon } from '@heroicons/react/24/outline'
 import { defineType } from 'sanity'
 
 export const contactForm =  defineType({
 	type: 'object',
 	name: 'contact-form',
 	title: 'Contact Form',
-  icon: Envelope,
+  icon: EnvelopeIcon,
 	fields: [
     {
 			type: 'string',
