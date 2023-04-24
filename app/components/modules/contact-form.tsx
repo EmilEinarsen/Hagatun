@@ -80,7 +80,7 @@ const ContactForm = ({ data }: ModuleProps<'contact-form'>) => {
               <div className='p-8 mx-auto rounded-full bg-blue-50 w-fit'><info.icon className='w-10 h-10' /></div>
               <h2 className='my-2 text-lg font-bold -tracking-tight'>{info.title}</h2>
               {info.info.map(v =>
-                <p>{v}</p>
+                <p key={v}>{v}</p>
               )}
             </div>
           )}

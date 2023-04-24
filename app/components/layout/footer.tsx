@@ -63,7 +63,7 @@ export const Footer = () => {
             )
 
             : block._type === 'information' ?
-              <div className="col-span-12 sm:col-span-3">
+              <div key={block._key} className="col-span-12 sm:col-span-3">
                 <h3 className="mb-2 font-medium text-gray-800">{T['contact information'][lang]?.toCapitalize()}</h3>
                 {block.offices?.map(office =>
                   <React.Fragment key={office._key}>
