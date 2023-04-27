@@ -1,9 +1,10 @@
 import { LoaderArgs, V2_MetaFunction } from "@remix-run/node";
 
 import { merge } from "~/utils/utils";
-import { getBlogPost, getSite } from "~/loaders";
 import { metadata } from "~/loaders/metadata";
 import { useRouteData } from "~/hooks/useRouteData";
+import { getBlogPost } from "~/loaders/getBlogPost";
+import { getSite } from "~/loaders/getSite";
 
 export const meta: V2_MetaFunction = ({ data, matches }) => {
 	return metadata(data, matches)

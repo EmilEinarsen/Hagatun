@@ -1,5 +1,5 @@
 import { useMatches } from '@remix-run/react'
-import { RouteData } from '~/loaders'
+import { RouteData } from '~/loaders/types'
 
 import { mergeSync } from '~/utils/utils'
 

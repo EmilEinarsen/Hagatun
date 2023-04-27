@@ -1,9 +1,9 @@
 import { json, LoaderFunction } from '@remix-run/node';
 
-import { getSite } from '~/loaders';
 import { assert } from '~/utils/utils';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { urlBuilder } from '~/utils/urlBuilder';
+import { getSite } from '~/loaders/getSite';
 
 
 const createImageGenerator = (src: SanityImageSource) => ({ size , ...rest }: { size: number }) => ({

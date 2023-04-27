@@ -1,12 +1,12 @@
 import { isRouteErrorResponse, Link, Outlet, useRouteError } from "@remix-run/react";
 import { LoaderArgs, LinksFunction } from "@remix-run/node";
 
-import Layout from "~/components/layout/layout";
-import { getSite } from "~/loaders";
+import Layout from "~/routes/_app/layout";
 import { merge } from "~/utils/utils";
 import { useRouteData } from "~/hooks/useRouteData";
 
 import stylesheet from "~/css/index.css";
+import { getSite } from "~/loaders/getSite";
 
 export const links: LinksFunction = () => {
   return [

@@ -3,7 +3,7 @@
  * https://dev.to/chrisbenjamin/tutorial-add-sitemapxml-and-robotstxt-to-remix-site-4n23
  */
 import { LoaderFunction } from "@remix-run/node";
-import { getSite } from "~/loaders";
+import { getSite } from "~/loaders/getSite";
 import { assert } from "~/utils/utils";
 
 export const loader: LoaderFunction = async ({ params }) => {

@@ -1,15 +1,16 @@
 import { useLoaderData } from "@remix-run/react";
 import { PreviewSuspense } from "@sanity/preview-kit";
 
-import { getPage, getPageQueryAndParams, getSite } from "~/loaders";
 import { metadata } from "~/loaders/metadata";
 import { useRouteData } from "~/hooks/useRouteData";
 import { merge } from "~/utils/utils";
 import { getSession } from "~/sessions";
-import { Page } from "~/components/app/Page";
 import { PagePreview } from "~/components/app/PagePreview";
 
 import type { ActionArgs, LoaderArgs, V2_MetaFunction } from "@remix-run/node";
+import { Module } from "~/components/modules";
+import { getPageQueryAndParams, getPage } from "~/loaders/getPage";
+import { getSite } from "~/loaders/getSite";
 
 export const meta: V2_MetaFunction = ({ data, matches }) => {
 	return metadata(data, matches)
@@ -68,7 +69,9 @@ export default function Component() {
         <PreviewSuspense fallback="Loading...">
           <PagePreview query={query} params={params} />
         </PreviewSuspense>
-        : <Page page={data.page} />
+        : data.page?.modules?.map((module, i) => (
+          <Module key={i} index={i} data={module} />
+        ))
       }
 		</>
 	);

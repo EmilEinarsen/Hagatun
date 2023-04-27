@@ -1,8 +1,8 @@
-import { PreviewSuspense } from '@sanity/preview-kit'
 import { QueryParams } from 'sanity';
+import { Page } from '~/loaders/getPage';
 import { usePreview } from '~/utils/sanityClient';
+import { Module } from '../modules';
 import { ExitPreview } from './ExitPreview'
-import { Page } from './Page'
 
 interface PagePreviewProps {
   query: string;
@@ -10,12 +10,14 @@ interface PagePreviewProps {
 }
 
 export const PagePreview = ({ query, params }: PagePreviewProps) => {
-  const page = usePreview(null, query, params)
+  const page: Page = usePreview(null, query, params)
   
   return (
     <>
       <ExitPreview />
-      <Page page={page} />
+      {page?.modules?.map((module, i) => (
+        <Module key={i} index={i} data={module} />
+      ))}
     </>
   )
 }

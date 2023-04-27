@@ -1,7 +1,7 @@
 
 import { V2_ServerRuntimeMetaDescriptor, V2_ServerRuntimeMetaArgs } from "@remix-run/server-runtime"
 import { replaceTemplateTags } from "sanity/lib/helpers"
-import { RouteData } from "."
+import { RouteData } from "./types";
 
 export function metadata(data: RouteData, matches: V2_ServerRuntimeMetaArgs['matches']) {
   const parentMeta = matches.flatMap(

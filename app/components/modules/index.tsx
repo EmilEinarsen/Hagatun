@@ -4,9 +4,9 @@ import Hero from './hero'
 import CTA from './cta'
 import Partners from './partners'
 import TextImage from './text-image'
-
-import type { Modules } from '~/loaders'
 import ContactForm from './contact-form'
+
+import type { Modules } from '~/loaders/groq-fragments/objects/modules'
 
 export interface ModuleProps<T extends Modules['_type'] = Modules['_type']> {
   index: number;

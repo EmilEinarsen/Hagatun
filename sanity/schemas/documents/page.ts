@@ -70,7 +70,7 @@ export const page = defineType({
       group: 'content'
     },
 		{
-      ...(console.log(image),image),
+      ...image,
 			name: 'thumbnail',
 			title: 'Thumbnail',
       group: 'thumbnail'

@@ -4,7 +4,7 @@
  */
 
 import { LoaderFunction } from '@remix-run/node';
-import { getSite } from '~/loaders'
+import { getSite } from '~/loaders/getSite';
 
 let sitemap: string | undefined
 
