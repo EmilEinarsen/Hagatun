@@ -1,12 +1,12 @@
-import { LinkSimpleHorizontal } from '@phosphor-icons/react'
 import { defineType } from 'sanity';
+import { LinkIcon } from '@heroicons/react/24/outline'
 import { i18nConfig } from 'sanity/lib/i18n';
 
 export const navPage = defineType({
   type: 'object',
   name: 'navPage',
   title: 'Page',
-  icon: LinkSimpleHorizontal,
+  icon: LinkIcon,
   fields: [
     {
       type: 'reference',

@@ -1,12 +1,12 @@
 import { defineField, defineType } from "sanity";
-import { Browser } from "@phosphor-icons/react";
 import { image } from 'sanity-page-builder'
+import { DocumentIcon } from "@heroicons/react/24/outline";
 
 import { isUniqueAcrossAllDocuments } from "../../lib/isUniqueAcrossAllDocuments";
 import { slugify } from "../../lib/slugify";
 import { i18nConfig } from "sanity/lib/i18n";
 
-export const PageIcon = Browser
+export const PageIcon = DocumentIcon
 
 export const page = defineType({
 	type: 'document',

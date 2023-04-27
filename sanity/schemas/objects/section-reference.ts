@@ -1,11 +1,11 @@
-import { LinkSimpleHorizontal } from '@phosphor-icons/react'
+import { CubeIcon } from '@heroicons/react/24/outline'
 import { defineType } from 'sanity';
 
 export const sectionReference = defineType({
   type: 'object',
   name: 'section-reference',
   title: 'Section',
-  icon: LinkSimpleHorizontal,
+  icon: CubeIcon,
   fields: [
     {
       type: 'reference',

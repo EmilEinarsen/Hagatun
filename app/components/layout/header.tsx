@@ -1,6 +1,6 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { CaretDown, List, X } from '@phosphor-icons/react';
+import { Bars3Icon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/solid';
 import * as Drawer from '@accessible/drawer'
 
 import { Logo } from '~/components/app/Logo';
@@ -50,7 +50,7 @@ export const Header = () => {
               'sm:group-open:before:fixed sm:group-open:before:top-0 sm:group-open:before:bottom-0 sm:group-open:before:left-0 sm:group-open:before:right-0 sm:group-open:before:content-[""]'
             )}
           >
-            {item.title} <CaretDown className='ml-3 group-open:rotate-180' />
+            {item.title} <ChevronDownIcon className='w-5 h-5 ml-3 group-open:rotate-180' />
           </summary>
           <ul className='right-0 py-2 max-sm:px-2 sm:bg-white sm:absolute sm:shadow-lg'>
             {item.items?.map(subItem => 
@@ -107,7 +107,7 @@ export const Header = () => {
                 className='menu-button'
                 onClick={open}
               >
-                <List className='w-8 h-8' />
+                <Bars3Icon className='w-8 h-8' />
               </button>
               
               {/* Backdrop */}
@@ -137,7 +137,7 @@ export const Header = () => {
                       className='menu-button'
                       onClick={close}
                     >
-                      <X className='w-8 h-8' />
+                      <XMarkIcon className='w-8 h-8 text-' />
                     </button>
                   </div>
 

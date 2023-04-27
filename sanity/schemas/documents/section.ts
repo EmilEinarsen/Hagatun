@@ -1,12 +1,12 @@
 import React from 'react'
 import { defineType } from 'sanity'
-import { Broadcast } from '@phosphor-icons/react'
+import { SignalIcon } from '@heroicons/react/24/outline'
 
 export const section = defineType({
   title: 'Reusable Section',
   name: 'section',
   type: 'document',
-  icon: Broadcast,
+  icon: SignalIcon,
   fields: [
     {
       title: 'Name',

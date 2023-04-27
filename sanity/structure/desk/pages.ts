@@ -3,6 +3,7 @@ import { i18nConfig } from 'sanity/lib/i18n'
 import Iframe from 'sanity-plugin-iframe-pane'
 
 import { PageIcon } from '../../schemas/documents/page'
+import { DocumentDuplicateIcon } from '@heroicons/react/24/outline'
 
 const createPageView = (S: StructureBuilder) => (id: string) => 
   S.document()
@@ -29,6 +30,7 @@ export const pagesMenu = (S: StructureBuilder): ListItemBuilder =>
         S.listItem()
 				.title('Static Pages')
 				.schemaType('page')
+        .icon(DocumentDuplicateIcon)
 				.child(S.documentTypeList('page')
 					.title('Static Pages')
 					.filter(
@@ -47,6 +49,7 @@ export const pagesMenu = (S: StructureBuilder): ListItemBuilder =>
         S.listItem()
           .title('Other Pages')
           .schemaType('page')
+          .icon(DocumentDuplicateIcon)
           .child(S.documentTypeList('page')
 						.title('Other Pages')
 						.filter(
@@ -65,6 +68,7 @@ export const pagesMenu = (S: StructureBuilder): ListItemBuilder =>
 				S.listItem()
           .title('All Pages')
           .schemaType('page')
+          .icon(DocumentDuplicateIcon)
           .child(S.documentTypeList('page')
 						.title('All Pages')
             .child(createPageView(S))

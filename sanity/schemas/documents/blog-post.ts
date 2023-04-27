@@ -1,4 +1,4 @@
-import { Note } from "@phosphor-icons/react"
+import { DocumentTextIcon } from "@heroicons/react/24/outline"
 import { defineField, defineType } from "sanity"
 import { image } from 'sanity-page-builder'
 import { i18nConfig } from "sanity/lib/i18n"
@@ -7,7 +7,7 @@ import { slugify } from "../../lib/slugify"
 
 const BLOG_POST_PREFIX = 'blog'
 
-export const BlogPostIcon = Note
+export const BlogPostIcon = DocumentTextIcon
 
 export const blogPost = defineType({
   type: 'document',

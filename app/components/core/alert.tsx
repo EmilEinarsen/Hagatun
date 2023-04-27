@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react'
-import { CheckCircle, WarningCircle } from '@phosphor-icons/react'
+import { CheckIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid'
 import { clsx } from '~/utils/utils'
 
 interface AlertProps extends PropsWithChildren {
@@ -7,8 +7,8 @@ interface AlertProps extends PropsWithChildren {
 }
 
 const ICON = {
-  success: CheckCircle,
-  error: WarningCircle
+  success: CheckIcon,
+  error: ExclamationCircleIcon
 }
 
 export const Alert = ({ status, children }: AlertProps) => {
@@ -24,10 +24,9 @@ export const Alert = ({ status, children }: AlertProps) => {
     >
       <div className="flex">
         <div className="py-1">
-          <Icon 
-            weight='regular' 
+          <Icon
             className={clsx(
-              'w-8 h-8 mr-4 fill-current',
+              'w-8 h-8 mr-4',
               status === 'success' && 'text-green-500',
               status === 'error' && 'text-red-500',
             )}

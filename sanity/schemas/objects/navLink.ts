@@ -1,11 +1,11 @@
-import { ArrowSquareOut } from '@phosphor-icons/react'
+import { LinkIcon } from '@heroicons/react/24/outline'
 import { defineType } from 'sanity'
 
 export const navLink = defineType({
 	type: 'object',
   name: 'navLink',
   title: 'Link',
-  icon: ArrowSquareOut,
+  icon: LinkIcon,
   fields: [
     {
       type: 'string',

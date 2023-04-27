@@ -1,11 +1,11 @@
-import { Handshake } from "@phosphor-icons/react";
+import { ChartBarSquareIcon } from "@heroicons/react/24/outline";
 import { defineType } from 'sanity';
 
 export const partners = defineType({
 	type: 'object',
 	name: 'partners',
 	title: 'Partners',
-  icon: Handshake,
+  icon: ChartBarSquareIcon,
 	fields: [
 		{
 			type: 'string',

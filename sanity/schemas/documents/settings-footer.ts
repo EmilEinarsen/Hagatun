@@ -1,8 +1,9 @@
-import { PaperPlaneTilt, List, AnchorSimple } from '@phosphor-icons/react'
+import { PaperAirplaneIcon, Bars3Icon } from '@heroicons/react/24/outline'
 import { defineType } from 'sanity'
+import { FlippedQueueListIcon } from 'sanity/lib/custom-icons'
 import { i18nConfig } from 'sanity/lib/i18n'
 
-export const FooterSettingsIcon = AnchorSimple
+export const FooterSettingsIcon = FlippedQueueListIcon
 
 export const settingsFooter = defineType({
   type: 'document',
@@ -12,18 +13,18 @@ export const settingsFooter = defineType({
     {
       title: 'Block 1',
       name: 'column1',
-      icon: PaperPlaneTilt,
+      icon: PaperAirplaneIcon,
       default: true
     },
     {
       title: 'Block 2',
       name: 'column2',
-      icon: List
+      icon: Bars3Icon
     },
     {
       title: 'Block 3',
       name: 'column3',
-      icon: List
+      icon: Bars3Icon
     }
   ],
   fields: [

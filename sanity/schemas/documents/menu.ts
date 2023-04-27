@@ -1,8 +1,8 @@
-import { List } from '@phosphor-icons/react'
+import { Bars3Icon } from '@heroicons/react/24/outline'
 import { defineType } from 'sanity'
 import { i18nConfig } from 'sanity/lib/i18n'
 
-export const MenuIcon = List
+export const MenuIcon = Bars3Icon
 
 export const menu = defineType({
   type: 'document',
@@ -47,7 +47,7 @@ export const menu = defineType({
     prepare: v => ({
 			title: v.title || 'Untitled',
 			subtitle: v.items?.length ? `${v.items.length} link(s)` : 'empty',
-			media: List
+			media: MenuIcon
     })
   }
 })

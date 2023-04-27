@@ -1,9 +1,9 @@
-import { GlobeSimple } from '@phosphor-icons/react'
+import { GlobeAltIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 import { defineField, defineType } from 'sanity'
 import { decodeAssetUrl } from '../../lib/helpers'
 
-export const SeoSettingsIcon = GlobeSimple
+export const SeoSettingsIcon = GlobeAltIcon
 
 export const settingsSeo = defineType({
   title: 'Default SEO / Share',

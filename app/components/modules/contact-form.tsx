@@ -1,4 +1,4 @@
-import { Envelope, MapPin, Phone, CheckCircle, WarningCircle } from '@phosphor-icons/react'
+import { EnvelopeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/solid'
 import { Form, Link, useActionData, useNavigation } from '@remix-run/react'
 import React, { useEffect, useRef } from 'react'
 
@@ -28,7 +28,7 @@ const FORM_FEEDBACK = {
 
 const getContactInfo = (company: Company) => [
   {
-    icon: Envelope,
+    icon: EnvelopeIcon,
     title: 'Skriv',
     info: [
       company.email,
@@ -36,12 +36,12 @@ const getContactInfo = (company: Company) => [
     ]
   },
   company.offices && {
-    icon: Phone,
+    icon: PhoneIcon,
     title: 'Ring',
     info: company.offices.map(office => `${office.name}: ${office.phoneNumber}`)
   },
   company.offices && {
-    icon: MapPin,
+    icon: MapPinIcon,
     title: 'Besök',
     info: company.offices.map(office => `${office.address}`)
   },
@@ -109,7 +109,7 @@ const ContactForm = ({ data }: ModuleProps<'contact-form'>) => {
                   type='email'
                   name='email'
                   className='block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50' 
-                  required 
+                  required
                 />
               </label>
 

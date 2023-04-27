@@ -1,4 +1,4 @@
-import { Star, Textbox } from '@phosphor-icons/react';
+import { StarIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 import { hero, textImage } from 'sanity-page-builder'
 
 import { blogPost } from "./documents/blog-post";
@@ -38,9 +38,9 @@ export const schemaTypes = [
 	/* Module types */
 	blogPosts,
 	cta,
-	{ ...hero, icon: Star },
+	{ ...hero, icon: StarIcon },
 	partners,
-	{ ...textImage, icon: Textbox },
+	{ ...textImage, icon: DocumentTextIcon },
   contactForm,
 
 	/* Object types */
