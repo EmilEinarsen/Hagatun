@@ -1,4 +1,5 @@
 import { Params } from "@remix-run/react"
+import { assert } from "~/utils/utils"
 
 export const LOCALE = {
 	'se': 'se',
@@ -23,7 +24,11 @@ export const i18nConfig = {
 
 export type Locale = keyof typeof LOCALE
 
-export const parseLocale = (locale?: unknown): Locale | undefined => LOCALE[locale as never]
+export const parseLocale = <T extends boolean>(locale: unknown, strict?: T) => {
+  locale = LOCALE[locale as never]
+  assert(locale || !strict, `Cannot parse ${locale} as it's not a valid Locale`)
+  return locale as T extends true ? Locale : Locale | undefined
+}
 
 export const getLocaleFromPathname = <T extends boolean = typeof i18nConfig.stripBase>(path: string | undefined | null, fallback?: T) => {
 	let locale: string | undefined = (path??'').replace(/^\//, "").split('/')[0]
