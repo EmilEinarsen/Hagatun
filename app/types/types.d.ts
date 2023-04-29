@@ -22,6 +22,7 @@ declare global {
     SANITY_PUBLIC_API_VERSION: string
     
     FORMSPREE_KEY: string
+    RECAPTCHA_SITE_KEY: string
   }
   namespace NodeJS {
     interface ProcessEnv extends ENV { }

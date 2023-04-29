@@ -27,7 +27,8 @@ export const loader = async () => {
       SANITY_PUBLIC_DATASET: process.env.SANITY_PUBLIC_DATASET,
       SANITY_PUBLIC_PROJECT_ID: process.env.SANITY_PUBLIC_PROJECT_ID,
       
-      FORMSPREE_KEY: process.env.FORMSPREE_KEY
+      FORMSPREE_KEY: process.env.FORMSPREE_KEY,
+      RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
     }
   })
 }

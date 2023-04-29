@@ -1,9 +1,11 @@
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/solid'
-import { Form, Link, useActionData, useNavigation } from '@remix-run/react'
+import { Form, Link, useActionData, useNavigation, useSubmit } from '@remix-run/react'
 import React, { useEffect, useRef } from 'react'
+import ReCAPTCHA from "react-google-recaptcha"
 
 import { useRouteData } from '~/hooks/useRouteData'
 import { Company } from '~/loaders/groq-fragments/documents/site'
+import { getENV } from '~/utils/getENV'
 import { ActionData } from '~/routes/_app.($lang).$'
 import { clsx } from '~/utils/utils'
 import { ModuleProps } from '.'
@@ -71,6 +73,20 @@ const ContactForm = ({ data }: ModuleProps<'contact-form'>) => {
 
   const feedback = state === 'success' || state === 'error' ? FORM_FEEDBACK[state] : undefined
 
+  const submit = useSubmit();
+  const captchaRef = useRef<any>(null)
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+
+    const captchaToken = await captchaRef.current.executeAsync();
+    captchaRef.current.reset();
+
+    formData.set("g-recaptcha-response", captchaToken);
+
+    submit(formData, { method: 'POST' });
+  }
+
   return (
     <section>
       <div className='max-w-6xl px-4 py-24 mx-auto max-sm:py-10 sm:px-6' id="contact-info">
@@ -101,8 +117,14 @@ const ContactForm = ({ data }: ModuleProps<'contact-form'>) => {
                 'space-y-8 transition-all',
                 feedback && 'blur-sm select-none'
               )}
-            >
-              
+              onSubmit={handleSubmit}
+            > 
+              <ReCAPTCHA
+                sitekey={getENV().RECAPTCHA_SITE_KEY}
+                ref={captchaRef}
+                size='invisible'
+                className='hidden'
+              />
               <label className='block'>
                 <span className='text-gray-700'>E-post*</span>
                 <input 
