@@ -5,8 +5,9 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
-import { LinksFunction } from "@remix-run/node";
+import { json, LinksFunction } from "@remix-run/node";
 import { DynamicLinks } from 'remix-utils'
 import { Analytics } from '@vercel/analytics/react';
 
@@ -19,8 +20,22 @@ export const links: LinksFunction = () => {
   ];
 };
 
+export const loader = async () => {
+  return json({
+    env: {
+      SANITY_PUBLIC_API_VERSION: process.env.SANITY_PUBLIC_API_VERSION,
+      SANITY_PUBLIC_DATASET: process.env.SANITY_PUBLIC_DATASET,
+      SANITY_PUBLIC_PROJECT_ID: process.env.SANITY_PUBLIC_PROJECT_ID,
+      
+      FORMSPREE_KEY: process.env.FORMSPREE_KEY,
+      RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
+    }
+  })
+}
+
 export default function Component() {
 	const { lang } = useRouteData()
+  const data = useLoaderData<typeof loader>()
 	
   return (
     <html lang={lang}>
@@ -39,6 +54,11 @@ export default function Component() {
       <body>
         <Outlet />
         <ScrollRestoration />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(data.env)}`,
+          }}
+        />
         <Scripts />
         <Analytics />
         {process.env.NODE_ENV === "development" && <LiveReload />}

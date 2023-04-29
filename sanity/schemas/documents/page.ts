@@ -4,7 +4,7 @@ import { DocumentIcon } from "@heroicons/react/24/outline";
 
 import { isUniqueAcrossAllDocuments } from "../../lib/isUniqueAcrossAllDocuments";
 import { slugify } from "../../lib/slugify";
-import { i18nConfig } from "sanity/lib/i18n";
+import { i18nConfig, parseLocale } from "sanity/lib/i18n";
 
 export const PageIcon = DocumentIcon
 
@@ -37,18 +37,21 @@ export const page = defineType({
 			description: '(unique)',
 			options: {
 				maxLength: 96,
-        source: (doc) => `${doc.__i18n_lang}/${doc.title}`,
+        source: (doc) => `${parseLocale(doc.__i18n_lang, true)}/${doc.title}`,
 				slugify,
 				isUnique: isUniqueAcrossAllDocuments,
       },
       validation: Rule => [
 				Rule.required(),
 				Rule.custom((input, { document }) => {
+          const locale = parseLocale(document?.__i18n_lang, true)
+          const slug = input?.current??''
+          const title = (document?.title+'').toLowerCase()
 					if(
 						document &&
-						!new RegExp(`^${document.__i18n_lang}$|^${document.__i18n_lang}/`).test(input?.current??'')
-					) return `Required to start with locale; Try "${document.__i18n_lang}/${(document.title+'').toLowerCase()}" instead`
-					if(input && typeof input.current === 'string' && /\/$/.test(input.current)) return `No trailing slash; Try "${input.current.replace(/\/$/,'')}" instead`
+						!new RegExp(`^${locale}$|^${locale}/`).test(slug)
+					) return `Required to start with locale; Try "${locale}/${title}" instead`
+					if(/\/$/.test(slug)) return `No trailing slash; Try "${slug.replace(/\/$/,'')}" instead`
 					return true
 				})
 			],
