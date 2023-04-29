@@ -40,7 +40,7 @@ export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
 
   try {
-    const res = await fetch('https://formspree.io/f/mqkoglqp', {
+    const res = await fetch(`https://formspree.io/f/${process.env.FORMSPREE_KEY}`, {
       method: "post",
       body: formData,
       headers: {
