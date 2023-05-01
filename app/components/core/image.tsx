@@ -32,7 +32,7 @@ export const Image = (
     loading='lazy'
     {...props}
     className={clsx(
-      background ? 'absolute top-0 left-0 w-full h-full select-none z-0' : 'block max-w-full w-full h-auto',
+      background ? 'absolute top-0 left-0 w-full h-full select-none z-0' : 'block max-w-full',
       background && image.type !== 'image/svg+xml' && 'object-cover',
       props.className,
     )}

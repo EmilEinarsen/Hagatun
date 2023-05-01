@@ -14,8 +14,8 @@ const createImageGenerator = (src: SanityImageSource) => ({ size , ...rest }: { 
 	...rest
 })
 
-export const loader: LoaderFunction = async ({ request, params }) => {
-	const { site } = await getSite(params)
+export const loader: LoaderFunction = async (args) => {
+	const { site } = await getSite(args)
 	assert(site)
 
 	const getImage = site.seo.touchIcon && createImageGenerator(site.seo.touchIcon)

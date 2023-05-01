@@ -1,53 +1,107 @@
 import groq from "groq";
-import { ImageObject } from 'sanity-page-builder'
+import { ImageObject, imageQuery } from 'sanity-page-builder'
 
-import { Header, header } from './header'
-import { Footer, footer } from './footer'
-import { referenceWithSlug } from "../objects/links";
-import { filterById } from "../utils";
-import { post } from '../objects/post'
+import { referenceBlogPostWithSlug, referenceWithSlug } from "../objects/links";
+import { filterById, filterSavedPages } from "../utils";
 import { PortableTextBlock } from "sanity";
 import { Locale } from "sanity/lib/i18n";
+import { author, Author } from "../objects/author";
+import { queryBlogID, queryHomeID } from "~/loaders/ids";
+import { normalizeSlug } from "../utils/normalizers";
+
+export const post = groq`
+	"id": _id,
+	_type,
+	"href": {
+		${referenceBlogPostWithSlug}
+	},
+	title,
+	image {
+		${imageQuery}
+	},
+	description,
+	body,
+	publishedAt,
+	"author": author->{
+    ${author}
+  },
+  "category": category->{
+    title,
+    description
+  },
+  "breadcrumbs": [
+    *${filterSavedPages}${filterById.replace('$id', queryBlogID)}[__i18n_lang == $lang][0] {
+      "name": title,
+      "href": ${normalizeSlug}
+    },
+    {
+      "name": title,
+      "href": ${normalizeSlug}
+    },
+  ]
+`
 
 export type Post = {
+	id: string
 	_type: 'blog-post'
-	_key: string
 	href: {
 		slug: string
 		title: string
 		lang: string
 	}
 	title: string
-	publishedAt: string
+	image: ImageObject
+	description?: string
 	body: PortableTextBlock
-	authorName: string
-	excerpt?: string
-	image?: ImageObject
-}
-
-export type BlogPost = {
-	_key: string
-	_type: 'blog-post'
-	lang: Locale
-	orderBy: 'recent' | 'featured'
-	header: Header
-	post: Post
-	footer: Footer
+	publishedAt: string
+	author: Author
+  category: {
+    title: string
+    description: string
+  }
+  breadcrumbs: { name: string, href: string }[]
 }
 
 export const blogPost = groq`
-	"header": {
-		${header},
-		"translations": *[_type == 'blog-post']${filterById.replace('$id', '^._id')} { 
-			${referenceWithSlug}
-		},
-	},
-	title, 
-	"post": {
-		${post}
-	},
+  ${post},
 	"lang": __i18n_lang,
-	"footer": {
-		${footer}
-	},
+  "translations": *[_type == 'blogPost']${filterById.replace('$id', '^._id')} { 
+    ${referenceWithSlug}
+  }
 `
+
+export type BlogPost = Post & {
+	id: string
+  lang: Locale
+	translations?: {
+		slug: string
+		title: string
+		lang: Locale
+	}[]
+}
+
+export const blogPosts = groq`
+	"id": _id,
+	title,
+	"lang": __i18n_lang,
+	"posts": *[_type == 'blogPost' && __i18n_lang == $lang] | order(publishedAt desc)[$start..$end] {
+    ${post}
+  },
+	"translations": *[_type == 'page']${filterById.replace('$id', '^._id')} { 
+		${referenceWithSlug}
+	},
+  "numberOfPosts": count(*[_type == 'blogPost'])
+`
+export type BlogPosts = {
+	id: string
+	title: string
+  lang: Locale
+  posts: Post[]
+	translations?: {
+		slug: string
+		title: string
+		lang: Locale
+	}[]
+  numberOfPosts: number
+}
+

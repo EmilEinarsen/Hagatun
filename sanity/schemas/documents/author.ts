@@ -11,6 +11,11 @@ export const author = defineType({
       title: 'Name',
     },
     {
+      type: 'string',
+      name: 'role',
+      title: 'Roll'
+    },
+    {
       type: 'slug',
       name: 'slug',
       title: 'Slug',

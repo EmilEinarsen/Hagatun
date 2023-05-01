@@ -6,8 +6,8 @@ import { LoaderFunction } from "@remix-run/node";
 import { getSite } from "~/loaders/getSite";
 import { assert } from "~/utils/utils";
 
-export const loader: LoaderFunction = async ({ params }) => {
-	const { site } = await getSite(params)
+export const loader: LoaderFunction = async (args) => {
+	const { site } = await getSite(args)
 
 	assert(site)
 	

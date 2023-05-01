@@ -67,7 +67,6 @@ export const page = defineType({
         { type: 'blog-posts' },
 				{ type: 'cta' },
 				{ type: 'text-image' },
-				{ type: 'contact-form' },
 				{ type: 'section-reference' },
       ],
       group: 'content'

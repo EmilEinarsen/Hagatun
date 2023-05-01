@@ -19,8 +19,8 @@ const init = {
 
 export const getUrl = (root: string, slug: string) => `https://${root}/${slug.replace(/^\//, '')}`
 
-export const loader: LoaderFunction = async ({ params }) => {
-	const { site } = await getSite(params)
+export const loader: LoaderFunction = async (args) => {
+	const { site } = await getSite(args)
 
   // If our sitemap is cached, we write the cached sitemap, no query to the CMS.
   if (sitemap || !site)

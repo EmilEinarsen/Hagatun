@@ -1,7 +1,8 @@
 import groq from 'groq'
 
-import { Modules, modules } from '../objects/modules'
+import { Modules, modules } from '../modules/modules'
 import { Locale } from 'sanity/lib/i18n'
+import { normalizeSlug } from '../utils/normalizers'
 import { referenceWithSlug } from '../objects/links'
 import { filterById } from '../utils'
 
@@ -16,7 +17,8 @@ export type Page = {
 		title: string
 		lang: Locale
 	}[]
-} | null | undefined
+  breadcrumbs: { name: string, href: string }[]
+}
 
 export const page = groq`
 	"id": _id,
@@ -29,9 +31,15 @@ export const page = groq`
 		!defined(_ref) => {
 			${modules},
 		}
-	}
-`/* 
-	"translations": *[_type == 'page']${filterById.replace('$id', '^._id')} { 
-		${referenceWithSlug}
 	},
-*/
+  "breadcrumbs": [
+    {
+      "name": title,
+      "href": ${normalizeSlug}
+    }
+  ],
+  "translations": *[_type == 'page']${filterById.replace('$id', '^._id')} { 
+    ${referenceWithSlug}
+  }
+`
+

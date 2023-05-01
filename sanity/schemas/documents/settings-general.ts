@@ -1,6 +1,7 @@
 import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 import { defineField, defineType } from 'sanity'
 import { i18nConfig } from 'sanity/lib/i18n'
+import { BLOG_POST_PREFIX } from './blog-post'
 
 export const GeneralSettingsIcon = Cog6ToothIcon
 
@@ -28,7 +29,26 @@ export const settingsGeneral = defineType({
       name: 'blog',
       type: 'reference',
       to: [{ type: 'page' }],
-      description: 'This page will show your blog-posts',
+      validation: Rule => [
+        Rule.custom((value, context) => 
+          context.getClient({apiVersion: '2021-06-07'})
+          .fetch(`*[_type == 'page' && _id == '${(value as any)._ref}'][0]`)
+          .then(page => {
+            const [_,blog] = page.slug.current.split('/')
+            
+            if(i18nConfig.base !== page.__i18n_lang) return `The page locale has to be the same as the base local. Was ${page.__i18n_lang}, requires ${i18nConfig.base}`
+            if(BLOG_POST_PREFIX[i18nConfig.base] !== blog) return `The page slug is invalid. Needs to be "${i18nConfig.base}/${BLOG_POST_PREFIX[i18nConfig.base]}"`
+
+            return true
+          })
+        )
+      ],
+			options: {
+				filter: ({ document }) => ({
+					filter: `${i18nConfig.fieldNames.lang} == "${i18nConfig.base}"` as any
+				})
+			},
+      description: `This page will show your blog-posts. The page\s slug needs to be "${i18nConfig.base}/${BLOG_POST_PREFIX[i18nConfig.base]}"`,
       group: 'displays'
     },
     {

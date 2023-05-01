@@ -14,9 +14,9 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const loader = async ({ params }: LoaderArgs) => {
+export const loader = async (args: LoaderArgs) => {
   const data = await merge([
-		getSite(params)
+		getSite(args)
 	])
 
   return data

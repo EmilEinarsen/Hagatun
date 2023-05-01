@@ -21,7 +21,6 @@ export const section = defineType({
       name: 'content',
       type: 'array',
       of: [
-				{ type: 'contact-form' },
 				{ type: 'cta' },
       ],
       validation: Rule =>
