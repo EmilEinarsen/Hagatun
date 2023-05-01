@@ -1,9 +1,9 @@
-import { Params } from "@remix-run/react"
+import { LoaderArgs } from "@remix-run/node"
 
-import { getLangAndSlugFromParams } from "sanity/lib/i18n"
 import { client } from "~/utils/sanityClient"
 import { urlBuilder } from "~/utils/urlBuilder"
 import { assert } from "~/utils/utils"
+import { getPathnameParts } from "./getPathnameParts"
 import { Site } from "./groq-fragments/documents/site"
 import { siteQuery } from "./groq-fragments/query"
 
@@ -14,10 +14,10 @@ const buildSiteImages = (site: Site) => ({
 	sitTouchIcon: site?.seo?.touchIcon && urlBuilder.image(site.seo.touchIcon).width(192).height(192).url(),
 })
 
-export async function getSite(params: Params) {
-	const { lang } = getLangAndSlugFromParams(params)
+export async function getSite({ params }: LoaderArgs) {
+	const { lang } = getPathnameParts(params)
 
-	const site: Site = await client.fetch(siteQuery, { lang })
+	const site = await client.fetch<Site>(siteQuery, { lang })
 	assert(site, 'site was undefined')
 	
 	return { 

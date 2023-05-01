@@ -1,6 +1,5 @@
 import { Link, LinkProps } from '@remix-run/react';
-import { useRouteData } from '~/hooks/useRouteData'
-import { clsx } from '~/utils/utils';
+import { useRouteData } from '~/hooks/useRouteData';
 import { Image } from '../core/image';
 
 interface LogoProps extends Omit<LinkProps, 'to'> {

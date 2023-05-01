@@ -1,4 +1,3 @@
-import { Params } from "@remix-run/react"
 import { assert } from "~/utils/utils"
 
 export const LOCALE = {
@@ -33,11 +32,4 @@ export const parseLocale = <T extends boolean>(locale: unknown, strict?: T) => {
 export const getLocaleFromPathname = <T extends boolean = typeof i18nConfig.stripBase>(path: string | undefined | null, fallback?: T) => {
 	let locale: string | undefined = (path??'').replace(/^\//, "").split('/')[0]
 	return (parseLocale(locale) || (fallback ?? i18nConfig.stripBase ? i18nConfig.base : undefined)) as T extends true ? Locale : Locale | undefined
-}
-
-export const getLangAndSlugFromParams = (params: Params) => {
-	const lang = (parseLocale(params.lang) ?? (i18nConfig.stripBase ? i18nConfig.base : undefined)) as typeof i18nConfig.stripBase extends true ? Locale : Locale | undefined
-	const prefix = !parseLocale(params.lang) ? params.lang : undefined
-	const slug = [lang, prefix, params['*']].filter(Boolean).join('/')
-	return { lang, slug }
 }

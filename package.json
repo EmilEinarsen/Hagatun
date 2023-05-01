@@ -49,6 +49,7 @@
     "eslint": "^8.38.0",
     "postcss-import": "^15.1.0",
     "postcss-nesting": "^11.2.2",
+    "remix-flat-routes": "^0.5.8",
     "tailwindcss": "^3.3.1",
     "typescript": "^5.0.4"
   },

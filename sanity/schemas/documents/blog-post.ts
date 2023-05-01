@@ -4,10 +4,11 @@ import { image } from 'sanity-page-builder'
 import { i18nConfig, LOCALE, parseLocale } from "sanity/lib/i18n"
 import { isUniqueAcrossAllDocuments } from "../../lib/isUniqueAcrossAllDocuments"
 import { slugify } from "../../lib/slugify"
+import { withThumbnail } from "../partials/withThumbnail"
 
-const BLOG_POST_PREFIX = {
-  [LOCALE.se]: 'blog',
-  [LOCALE.en]: 'blog'
+export const BLOG_POST_PREFIX = {
+  [LOCALE.se]: 'nyheter',
+  [LOCALE.en]: 'news'
 }
 
 export const BlogPostIcon = DocumentTextIcon
@@ -23,18 +24,11 @@ export const blogPost = defineType({
 	icon: BlogPostIcon,
 	groups: [
 		{ title: 'Settings', name: 'settings' },
-		{ title: 'Thumbnail', name: 'thumbnail' },
 		{ title: 'Content', name: 'content', default: true },
 		{ title: 'Meta', name: 'meta' },
 	],
   fields: [
-		{
-			type: 'string',
-			name: 'title',
-			title: 'Title',
-			validation: Rule => Rule.required(),
-			group: ['content', 'thumbnail'],
-		},
+		...withThumbnail,
 		defineField({
 			type: 'slug',
 			name: 'slug',
@@ -68,34 +62,10 @@ export const blogPost = defineType({
 			group: ['settings', 'content']
 		}),
     {
-      ...image,
-      name: 'mainImage',
-      title: 'Main image',
-			validation: Rule => Rule.required(),
-      group: 'content'
-    },
-    {
       name: 'body',
       title: 'Body',
       type: 'blockContent',
       group: 'content'
-    },
-    {
-      ...image,
-			name: 'thumbnail',
-			title: 'Thumbnail',
-			validation: Rule => Rule.required(),
-      group: 'thumbnail'
-    },
-    {
-      name: "excerpt",
-      title: "Excerpt",
-      description:
-        "The excerpt is used in blog feeds, and also for search results",
-      type: "text",
-      rows: 3,
-      validation: Rule => Rule.required().max(200),
-      group: 'thumbnail'
     },
     {
       type: 'date',
@@ -106,18 +76,20 @@ export const blogPost = defineType({
 			initialValue: (new Date()).toISOString().split('T')[0]
     },
     {
+      type: 'reference',
       name: 'author',
       title: 'Author',
-      type: 'reference',
       to: {type: 'author'},
-      group: 'meta'
+      group: 'meta',
+			validation: Rule => Rule.required(),
     },
     {
-      type: 'array',
-      name: 'categories',
-      title: 'Categories',
-      of: [{type: 'reference', to: {type: 'category'}}],
-      group: 'meta'
+      type: 'reference',
+      name: 'category',
+      title: 'Category',
+      to: {type: 'category'},
+      group: 'meta',
+			validation: Rule => Rule.required(),
     },
 		{
 			title: 'Overlay header with transparency?',
@@ -141,7 +113,7 @@ export const blogPost = defineType({
       title: 'title',
       author: 'author.name',
       slug: 'slug',
-      media: 'mainImage'
+      media: 'image'
     },
     prepare: v => Object.assign({}, v, {
 			subtitle: v.slug.current || '(missing slug)'

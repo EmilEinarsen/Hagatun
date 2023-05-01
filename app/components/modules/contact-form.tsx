@@ -1,15 +1,27 @@
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/solid'
-import { Form, Link, useActionData, useNavigation, useSubmit } from '@remix-run/react'
+import { Form, Link, useNavigation, useSearchParams, useSubmit } from '@remix-run/react'
 import React, { useEffect, useRef } from 'react'
 import ReCAPTCHA from "react-google-recaptcha"
+import { LOCALE, Locale } from 'sanity/lib/i18n'
 
 import { useRouteData } from '~/hooks/useRouteData'
 import { Company } from '~/loaders/groq-fragments/documents/site'
-import { getENV } from '~/utils/getENV'
-import { ActionData } from '~/routes/_app.($lang).$'
+import { getENV } from '~/loaders/groq-fragments/utils/getENV'
 import { clsx } from '~/utils/utils'
 import { ModuleProps } from '.'
 import { Alert } from '../core/alert'
+
+const T = {
+  [LOCALE.se]: {
+    title: 'Kontakta oss',
+    subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+  },
+  [LOCALE.en]: {
+    title: 'Contact us',
+    subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    
+  },
+} as const satisfies { [K in Locale]: Record<string, string> }
 
 const FORM_FEEDBACK = {
   success: {
@@ -49,15 +61,19 @@ const getContactInfo = (company: Company) => [
   },
 ].filter((v): v is Exclude<typeof v, undefined> => !!v)
 
-const ContactForm = ({ data }: ModuleProps<'contact-form'>) => {
-  const { site } = useRouteData()
-  const actionData = useActionData() as ActionData;
+const ContactForm = (props: Partial<ModuleProps<'contact-form'>>) => {
+  const { site, lang } = useRouteData()
+  const { title = T[lang].title, subtitle = T[lang].subtitle } = props.data ?? {}
+  
   const transition = useNavigation();
+  const [ search ] = useSearchParams()
+  const status = +(search.get('status')??NaN)
+
   const state = transition.state === 'submitting'
     ? "submitting"
-    : actionData?.status === 'success'
+    : status === 200
     ? "success"
-    : actionData?.status === 'error'
+    : status === 400
     ? "error"
     : "idle";
 
@@ -65,7 +81,7 @@ const ContactForm = ({ data }: ModuleProps<'contact-form'>) => {
   const successRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    if (state === 'success' || state === 'error') {
+    if (state === 'success') {
       formRef.current?.reset()
       successRef.current?.focus();
     }
@@ -84,12 +100,12 @@ const ContactForm = ({ data }: ModuleProps<'contact-form'>) => {
 
     formData.set("g-recaptcha-response", captchaToken);
 
-    submit(formData, { method: 'POST' });
+    submit(formData, { action: '/api/contact', method: 'POST', replace: true, preventScrollReset: true });
   }
 
   return (
     <section>
-      <div className='max-w-6xl px-4 py-24 mx-auto max-sm:py-10 sm:px-6' id="contact-info">
+      <div className='max-w-6xl px-4 py-24 mx-auto sm:px-6' id="contact-info">
         <div className='flex flex-wrap justify-around gap-10'>
           {getContactInfo(site.company).map(info => 
             <div key={info.title} className='text-center w-72'>
@@ -105,13 +121,11 @@ const ContactForm = ({ data }: ModuleProps<'contact-form'>) => {
       <div className="relative bg-blue-50">
         <span id="contact-form" className='absolute -top-20' />
         <div className='relative max-w-screen-sm px-4 py-24 mx-auto sm:py-16 sm:px-6'>
-          <h2 className='mb-4 text-4xl font-extrabold tracking-tight text-center text-gray-900'>{data.title}</h2>
-          <p className='mb-8 font-light text-center lg:mb-16 sm:text-xl'>{data.subtitle}</p>
+          <h2 className='mb-4 text-4xl font-extrabold tracking-tight text-center text-gray-900'>{title}</h2>
+          <p className='mb-8 font-light text-center lg:mb-16 sm:text-xl'>{subtitle}</p>
           <div>
             <Form
               ref={formRef}
-              replace 
-              method="post" 
               aria-hidden={state === "success"}
               className={clsx(
                 'space-y-8 transition-all',

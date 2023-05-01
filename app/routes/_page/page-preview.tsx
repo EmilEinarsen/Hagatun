@@ -1,8 +1,9 @@
 import { QueryParams } from 'sanity';
 import { Page } from '~/loaders/getPage';
 import { usePreview } from '~/utils/sanityClient';
-import { Module } from '../modules';
-import { ExitPreview } from './ExitPreview'
+import { Module } from '../../components/modules';
+import ContactForm from '../../components/modules/contact-form';
+import { ExitPreview } from '../../components/app/ExitPreview'
 
 interface PagePreviewProps {
   query: string;
@@ -18,6 +19,7 @@ export const PagePreview = ({ query, params }: PagePreviewProps) => {
       {page?.modules?.map((module, i) => (
         <Module key={i} index={i} data={module} />
       ))}
+      <ContactForm />
     </>
   )
 }

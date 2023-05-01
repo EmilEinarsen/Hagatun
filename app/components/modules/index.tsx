@@ -5,8 +5,9 @@ import CTA from './cta'
 import Partners from './partners'
 import TextImage from './text-image'
 import ContactForm from './contact-form'
+import BlogPosts from './blog-posts'
 
-import type { Modules } from '~/loaders/groq-fragments/objects/modules'
+import type { Modules } from '~/loaders/groq-fragments/modules/modules'
 
 export interface ModuleProps<T extends Modules['_type'] = Modules['_type']> {
   index: number;
@@ -20,7 +21,8 @@ const modules = {
 	cta: CTA,
 	partners: Partners,
 	'text-image': TextImage,
-  'contact-form': ContactForm
+  'contact-form': ContactForm,
+  'blog-posts': BlogPosts
 } as { [k in Modules['_type']]: React.FunctionComponent<ModuleProps> };
 
 export const Module = ({

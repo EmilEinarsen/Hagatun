@@ -7,6 +7,16 @@ export const blogPosts = defineType({
 	title: 'Blog Posts',
 	icon: CubeIcon,
 	fields: [
+    {
+      type: 'string',
+      name: 'title',
+      title: 'Title'
+    },
+    {
+      type: 'string',
+      name: 'subtitle',
+      title: 'Subtitle'
+    },
 		{
 			type: 'string',
 			name: 'orderBy',
