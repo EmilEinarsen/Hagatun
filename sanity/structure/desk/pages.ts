@@ -1,5 +1,5 @@
 import { ListItemBuilder, StructureBuilder } from 'sanity/desk'
-import { i18nConfig } from 'sanity/lib/i18n'
+import { i18n } from 'sanity/lib/i18n'
 import Iframe from 'sanity-plugin-iframe-pane'
 
 import { PageIcon } from '../../schemas/documents/page'
@@ -34,7 +34,7 @@ export const pagesMenu = (S: StructureBuilder): ListItemBuilder =>
 				.child(S.documentTypeList('page')
 					.title('Static Pages')
 					.filter(
-						`_type == "page" && __i18n_lang == "${i18nConfig.base}" && (_id in [
+						`_type == "page" && __i18n_lang == "${i18n.base}" && (_id in [
 							*[_type == "generalSettings"][0].home._ref,
 							*[_type == "generalSettings"][0].blog._ref,
 							*[_type == "generalSettings"][0].error._ref,
@@ -53,7 +53,7 @@ export const pagesMenu = (S: StructureBuilder): ListItemBuilder =>
           .child(S.documentTypeList('page')
 						.title('Other Pages')
 						.filter(
-							`_type == "page" && __i18n_lang == "${i18nConfig.base}" && !(_id in [
+							`_type == "page" && __i18n_lang == "${i18n.base}" && !(_id in [
 								*[_type == "generalSettings"][0].home._ref,
 								*[_type == "generalSettings"][0].blog._ref,
 								*[_type == "generalSettings"][0].error._ref,

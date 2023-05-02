@@ -1,6 +1,6 @@
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import { defineType } from 'sanity'
-import { i18nConfig } from 'sanity/lib/i18n'
+import { i18n } from 'sanity/lib/i18n'
 
 export const MenuIcon = Bars3Icon
 
@@ -10,7 +10,7 @@ export const menu = defineType({
   title: 'Menu',
   i18n: true,
 	initialValue: {
-    __i18n_lang: i18nConfig.base,
+    __i18n_lang: i18n.base,
   },
   icon: MenuIcon,
   fields: [
@@ -32,7 +32,7 @@ export const menu = defineType({
           to: [{ type: 'menu' }],
 					options: {
 						filter: ({ document }) => ({
-							filter: `${i18nConfig.fieldNames.lang} == "${document.__i18n_lang}"` as any
+							filter: `${i18n.fieldNames.lang} == "${document.__i18n_lang}"` as any
 						})
 					}
         }

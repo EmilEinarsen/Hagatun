@@ -1,4 +1,5 @@
-const util = process.env.NODE_ENV === 'development' ? require('remix-flat-routes') : undefined
+const util = require('remix-flat-routes')
+const { i18nConfig, localizeRoutes } = require('./locale.config')
 
 /** @type {import('@remix-run/dev').AppConfig} */
 module.exports = {
@@ -13,8 +14,18 @@ module.exports = {
     v2_errorBoundary: true,
     v2_normalizeFormMethod: true
   },
-  routes: util && (async defineRoutes => {
-    console.log(Object.values(util.flatRoutes('routes', defineRoutes)).map(v => v.path))
-    return util.flatRoutes('routes', defineRoutes)
-  }),
+  routes: async defineRoutes => {
+    const routes = util.flatRoutes('routes', defineRoutes)
+
+    return localizeRoutes(i18nConfig.LOCALE.en, routes, [
+      {
+        matchAll: `routes/_app.($lang).{{slug}}`, 
+        slugs: {
+          [i18nConfig.LOCALE.en]: 'news',
+          [i18nConfig.LOCALE.se]: 'nyheter',
+        }
+      }
+    ])
+  }
 };
+

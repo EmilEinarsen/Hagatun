@@ -1,5 +1,5 @@
 import groq from 'groq'
-import { i18nConfig } from '../../../../sanity/lib/i18n'
+import { i18n } from '../../../../sanity/lib/i18n'
 import { ImageObject, imageQuery } from 'sanity-page-builder'
 
 import { ReferenceWithSlug, referenceWithSlug } from '../objects/links'
@@ -59,9 +59,9 @@ export const site = groq`
 	"home": *[_type == 'page']${filterById.replace('$id', '*[_type=="generalSettings"][0].home->_id')}[__i18n_lang == $lang][0] {
 		${referenceWithSlug}
 	},
-	"pages": *${filterSavedPages}[__i18n_lang == '${i18nConfig.base}'] {
+	"pages": *${filterSavedPages}[__i18n_lang == '${i18n.base}'] {
 		${referenceWithSlug},
-		"translations": *[_type == 'page']${filterById.replace('$id', '^._id')}[__i18n_lang != '${i18nConfig.base}'] { 
+		"translations": *[_type == 'page']${filterById.replace('$id', '^._id')}[__i18n_lang != '${i18n.base}'] { 
 			${referenceWithSlug}
 		}
 	},

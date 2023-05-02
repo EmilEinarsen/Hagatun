@@ -2,7 +2,7 @@ import { EnvelopeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/solid'
 import { Form, Link, useNavigation, useSearchParams, useSubmit } from '@remix-run/react'
 import React, { useEffect, useRef } from 'react'
 import ReCAPTCHA from "react-google-recaptcha"
-import { LOCALE, Locale } from 'sanity/lib/i18n'
+import { i18n, Locale } from 'sanity/lib/i18n'
 
 import { useRouteData } from '~/hooks/useRouteData'
 import { Company } from '~/loaders/groq-fragments/documents/site'
@@ -12,14 +12,13 @@ import { ModuleProps } from '.'
 import { Alert } from '../core/alert'
 
 const T = {
-  [LOCALE.se]: {
+  [i18n.LOCALE.se]: {
     title: 'Kontakta oss',
     subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   },
-  [LOCALE.en]: {
+  [i18n.LOCALE.en]: {
     title: 'Contact us',
     subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-    
   },
 } as const satisfies { [K in Locale]: Record<string, string> }
 

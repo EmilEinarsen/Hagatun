@@ -4,7 +4,7 @@ import { DocumentIcon } from "@heroicons/react/24/outline";
 
 import { isUniqueAcrossAllDocuments } from "../../lib/isUniqueAcrossAllDocuments";
 import { slugify } from "../../lib/slugify";
-import { i18nConfig, parseLocale } from "sanity/lib/i18n";
+import { i18n, parseLocale } from "sanity/lib/i18n";
 
 export const PageIcon = DocumentIcon
 
@@ -14,7 +14,7 @@ export const page = defineType({
 	title: 'Page',
   i18n: true,
 	initialValue: {
-    __i18n_lang: i18nConfig.base,
+    __i18n_lang: i18n.base,
   },
 	icon: PageIcon,
 	groups: [

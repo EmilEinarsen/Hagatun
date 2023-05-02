@@ -1,6 +1,6 @@
 import { QueueListIcon } from '@heroicons/react/24/outline'
 import { defineType } from 'sanity'
-import { i18nConfig } from 'sanity/lib/i18n'
+import { i18n } from 'sanity/lib/i18n'
 
 export const HeaderSettingsIcon = QueueListIcon
 
@@ -15,8 +15,8 @@ export const settingsHeader = defineType({
       type: 'reference',
       to: [{ type: 'menu' }],
 			options: {
-				filter: `${i18nConfig.fieldNames.lang} == "${i18nConfig.base}"`
-			},
+				filter: `${i18n.fieldNames.lang} == "${i18n.base}"`
+			}
     }
   ],
   preview: {

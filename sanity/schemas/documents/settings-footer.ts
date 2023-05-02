@@ -1,7 +1,7 @@
 import { PaperAirplaneIcon, Bars3Icon } from '@heroicons/react/24/outline'
 import { defineType } from 'sanity'
 import { FlippedQueueListIcon } from 'sanity/lib/custom-icons'
-import { i18nConfig } from 'sanity/lib/i18n'
+import { i18n } from 'sanity/lib/i18n'
 
 export const FooterSettingsIcon = FlippedQueueListIcon
 
@@ -50,7 +50,7 @@ export const settingsFooter = defineType({
       to: [{ type: 'menu' }],
       group: 'column2',
 			options: {
-				filter: `${i18nConfig.fieldNames.baseReference} == ${i18nConfig.base}`
+				filter: `${i18n.fieldNames.baseReference} == ${i18n.base}`
 			},
     },
     {
@@ -66,7 +66,7 @@ export const settingsFooter = defineType({
       to: [{ type: 'menu' }],
       group: 'column3',
 			options: {
-				filter: `${i18nConfig.fieldNames.baseReference} == ${i18nConfig.base}`
+				filter: `${i18n.fieldNames.baseReference} == ${i18n.base}`
 			},
     }
   ],

@@ -1,5 +1,5 @@
 import { defineType } from "sanity"
-import { i18nConfig } from "sanity/lib/i18n"
+import { i18n } from "sanity/lib/i18n"
 
 export const blockContent = defineType({
 	type: 'array',
@@ -54,7 +54,7 @@ export const blockContent = defineType({
                 to: [{ type: 'page' }],
 								options: {
 									filter: ({ document }) => ({
-										filter: `${i18nConfig.fieldNames.lang} == "${document.__i18n_lang}"` as any
+										filter: `${i18n.fieldNames.lang} == "${document.__i18n_lang}"` as any
 									})
 								},
                 hidden: ({ parent }) => parent.linkType !== 'internal'
