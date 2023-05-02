@@ -1,30 +1,19 @@
 import { assert } from "~/utils/utils"
+import { i18nConfig } from '~/../locale.config'
 
-export const LOCALE = {
-	'se': 'se',
-	'en': 'en',
-} as const
-
-export const LOCALE_LABEL = {
-	[LOCALE.se]: 'Svenska',
-	[LOCALE.en]: 'English',
-} as const
-
-export const i18nConfig = {
-	base: LOCALE.se,
-	stripBase: true,
-	languages: Object.entries(LOCALE_LABEL).map(([id, title]) => ({ id, title })),
-	fieldNames: {
+export const i18n = {
+  ...i18nConfig,
+  fieldNames: {
 		lang: '__i18n_lang',
 		references: '__i18n_refs',
 		baseReference: '__i18n_base'
 	}
-} as const
+}
 
-export type Locale = keyof typeof LOCALE
+export type Locale = keyof typeof i18n.LOCALE
 
 export const parseLocale = <T extends boolean>(locale: unknown, strict?: T) => {
-  locale = LOCALE[locale as never]
+  locale = i18n.LOCALE[locale as never]
   assert(locale || !strict, `Cannot parse ${locale} as it's not a valid Locale`)
   return locale as T extends true ? Locale : Locale | undefined
 }

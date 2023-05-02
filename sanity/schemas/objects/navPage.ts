@@ -1,6 +1,6 @@
 import { defineType } from 'sanity';
 import { LinkIcon } from '@heroicons/react/24/outline'
-import { i18nConfig } from 'sanity/lib/i18n';
+import { i18n } from 'sanity/lib/i18n';
 
 export const navPage = defineType({
   type: 'object',
@@ -15,7 +15,7 @@ export const navPage = defineType({
       to: [{ type: 'page' }],
 			options: {
 				filter: ({ document }) => ({
-					filter: `${i18nConfig.fieldNames.lang} == "${document.__i18n_lang}"` as any
+					filter: `${i18n.fieldNames.lang} == "${document.__i18n_lang}"` as any
 				})
 			},
     }

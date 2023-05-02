@@ -1,14 +1,13 @@
 import { DocumentTextIcon } from "@heroicons/react/24/outline"
 import { defineField, defineType } from "sanity"
-import { image } from 'sanity-page-builder'
-import { i18nConfig, LOCALE, parseLocale } from "sanity/lib/i18n"
+import { i18n, parseLocale } from "sanity/lib/i18n"
 import { isUniqueAcrossAllDocuments } from "../../lib/isUniqueAcrossAllDocuments"
 import { slugify } from "../../lib/slugify"
 import { withThumbnail } from "../partials/withThumbnail"
 
 export const BLOG_POST_PREFIX = {
-  [LOCALE.se]: 'nyheter',
-  [LOCALE.en]: 'news'
+  [i18n.LOCALE.se]: 'nyheter',
+  [i18n.LOCALE.en]: 'news'
 }
 
 export const BlogPostIcon = DocumentTextIcon
@@ -19,7 +18,7 @@ export const blogPost = defineType({
   title: 'Blog post',
   i18n: true,
 	initialValue: {
-    __i18n_lang: i18nConfig.base,
+    __i18n_lang: i18n.base,
   },
 	icon: BlogPostIcon,
 	groups: [

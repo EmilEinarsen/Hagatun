@@ -1,6 +1,6 @@
 import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 import { defineField, defineType } from 'sanity'
-import { i18nConfig } from 'sanity/lib/i18n'
+import { i18n } from 'sanity/lib/i18n'
 import { BLOG_POST_PREFIX } from './blog-post'
 
 export const GeneralSettingsIcon = Cog6ToothIcon
@@ -36,8 +36,8 @@ export const settingsGeneral = defineType({
           .then(page => {
             const [_,blog] = page.slug.current.split('/')
             
-            if(i18nConfig.base !== page.__i18n_lang) return `The page locale has to be the same as the base local. Was ${page.__i18n_lang}, requires ${i18nConfig.base}`
-            if(BLOG_POST_PREFIX[i18nConfig.base] !== blog) return `The page slug is invalid. Needs to be "${i18nConfig.base}/${BLOG_POST_PREFIX[i18nConfig.base]}"`
+            if(i18n.base !== page.__i18n_lang) return `The page locale has to be the same as the base local. Was ${page.__i18n_lang}, requires ${i18n.base}`
+            if(BLOG_POST_PREFIX[i18n.base] !== blog) return `The page slug is invalid. Needs to be "${i18n.base}/${BLOG_POST_PREFIX[i18n.base]}"`
 
             return true
           })
@@ -45,10 +45,10 @@ export const settingsGeneral = defineType({
       ],
 			options: {
 				filter: ({ document }) => ({
-					filter: `${i18nConfig.fieldNames.lang} == "${i18nConfig.base}"` as any
+					filter: `${i18n.fieldNames.lang} == "${i18n.base}"` as any
 				})
 			},
-      description: `This page will show your blog-posts. The page\s slug needs to be "${i18nConfig.base}/${BLOG_POST_PREFIX[i18nConfig.base]}"`,
+      description: `This page will show your blog-posts. The page\s slug needs to be "${i18n.base}/${BLOG_POST_PREFIX[i18n.base]}"`,
       group: 'displays'
     },
     {
@@ -107,17 +107,17 @@ export const settingsGeneral = defineType({
 					name: 'defaultLang',
 					type: 'string',
 					options: {
-						list: i18nConfig.languages.map(l => ({ ...l, value: l.id  }))
+						list: i18n.languages.map(l => ({ ...l, value: l.id  }))
 					},
 					readOnly: true,
-					initialValue: i18nConfig.base
+					initialValue: i18n.base
 				},
 				{
 					title: 'Strip default language',
 					name: 'stripDefaultLang',
 					description: 'Remove default language from url',
 					type: 'boolean',
-					initialValue: i18nConfig.stripBase,
+					initialValue: i18n.stripBase,
 					readOnly: true
 				},
 				{
@@ -159,11 +159,11 @@ export const settingsGeneral = defineType({
 				name: 'translations',
 				options: { collapsible: true }
 			}],
-			fields: i18nConfig.languages.map((lang) => ({
+			fields: i18n.languages.map((lang) => ({
 				title: lang.title,
 				name: lang.id,
 				type: 'text',
-				fieldset: lang.id !== i18nConfig.base ? 'translations' : undefined
+				fieldset: lang.id !== i18n.base ? 'translations' : undefined
 			})),
       group: 'company'
 		}),

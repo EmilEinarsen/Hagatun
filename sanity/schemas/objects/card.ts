@@ -1,5 +1,5 @@
 import { defineType } from "sanity";
-import { i18nConfig } from "sanity/lib/i18n";
+import { i18n } from "sanity/lib/i18n";
 
 export const card = defineType({
 	type: 'object',
@@ -32,7 +32,7 @@ export const card = defineType({
 			title: 'Link',
       to: [{ type: 'page' }],
 			options: {
-				filter: `${i18nConfig.fieldNames.lang} == "${i18nConfig.base}"`
+				filter: `${i18n.fieldNames.lang} == "${i18n.base}"`
 			},
 		}
 	]
