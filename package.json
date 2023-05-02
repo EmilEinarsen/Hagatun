@@ -4,6 +4,7 @@
   "scripts": {
     "build": "remix build",
     "start": "remix-serve build",
+    "start-prod": "remix build && dotenv -e .env.prod remix-serve build",
     "dev": "remix dev",
     "tsc": "tsc"
   },
@@ -46,6 +47,7 @@
     "@types/react-google-recaptcha": "^2.1.5",
     "autoprefixer": "^10.4.14",
     "cssnano": "^6.0.0",
+    "dotenv-cli": "^7.2.1",
     "eslint": "^8.38.0",
     "postcss-import": "^15.1.0",
     "postcss-nesting": "^11.2.2",
