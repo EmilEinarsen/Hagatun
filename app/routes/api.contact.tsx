@@ -15,7 +15,6 @@ export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
 
   const url = new URL(request.headers.get("Referer") ?? '/')
-  url.searchParams 
 
   try {
     const res = await fetch(`https://formspree.io/f/${process.env.FORMSPREE_KEY}`, {
@@ -30,7 +29,7 @@ export const action = async ({ request }: ActionArgs) => {
     if (result.ok) {
       url.searchParams.append('status', '200')
       return redirect(url.href);
-    }
+    } else throw result.error
   } catch (error) {
     console.error(error)
   }
@@ -39,7 +38,7 @@ export const action = async ({ request }: ActionArgs) => {
   return redirect(url.href);
 };
 
-export const loader = async ({ request, ...hej }: LoaderArgs) => {
+export const loader = async ({ request }: LoaderArgs) => {
   return redirectBack(request, { fallback: '/' })
 }
 
