@@ -1,4 +1,3 @@
-
 export const ExitPreview = () => {
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center w-screen h-screen pointer-events-none">

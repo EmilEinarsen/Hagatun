@@ -1,14 +1,14 @@
 import groq from 'groq'
-import { Locale } from 'sanity/lib/i18n'
+import type {Locale} from 'sanity/lib/i18n'
 
-import { normalizeSlug } from '../utils/normalizers'
+import {normalizeSlug} from '../utils/normalizers'
 
 export type ReferenceWithSlug = {
-	_key: string,
-	_updatedAt: string
-	slug: string
-	title: string
-	lang: Locale
+  _key: string
+  _updatedAt: string
+  slug: string
+  title: string
+  lang: Locale
 }
 
 export const referenceWithSlug = groq`
@@ -17,7 +17,6 @@ export const referenceWithSlug = groq`
 	"lang": __i18n_lang,
 	_updatedAt
 `
-
 
 export const referenceBlogPostWithSlug = groq`
 	"slug": ${normalizeSlug}, 

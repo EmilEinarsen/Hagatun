@@ -1,6 +1,7 @@
-import React, { PropsWithChildren } from 'react'
-import { CheckIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid'
-import { clsx } from '~/utils/utils'
+import type {PropsWithChildren} from 'react'
+import React from 'react'
+import {CheckIcon, ExclamationCircleIcon} from '@heroicons/react/24/solid'
+import {clsx} from 'clsx'
 
 interface AlertProps extends PropsWithChildren {
   status: 'error' | 'success'
@@ -8,18 +9,18 @@ interface AlertProps extends PropsWithChildren {
 
 const ICON = {
   success: CheckIcon,
-  error: ExclamationCircleIcon
+  error: ExclamationCircleIcon,
 }
 
-export const Alert = ({ status, children }: AlertProps) => {
+export const Alert = ({status, children}: AlertProps) => {
   const Icon = ICON[status]
   return (
-    <div 
+    <div
       className={clsx(
         'max-w-md px-4 py-3 m-auto rounded-b shadow-md h-min',
         status === 'success' && 'text-green-900 bg-green-100',
         status === 'error' && 'text-red-900 bg-red-100'
-      )} 
+      )}
       role="alert"
     >
       <div className="flex">
@@ -28,13 +29,11 @@ export const Alert = ({ status, children }: AlertProps) => {
             className={clsx(
               'w-8 h-8 mr-4',
               status === 'success' && 'text-green-500',
-              status === 'error' && 'text-red-500',
+              status === 'error' && 'text-red-500'
             )}
           />
         </div>
-        <div>
-          {children}
-        </div>
+        <div>{children}</div>
       </div>
     </div>
   )

@@ -1,23 +1,19 @@
-import { isRouteErrorResponse, Link, Outlet, useRouteError } from "@remix-run/react";
-import { LoaderArgs, LinksFunction } from "@remix-run/node";
+import {isRouteErrorResponse, Link, Outlet, useRouteError} from '@remix-run/react'
+import type {LoaderArgs, LinksFunction} from '@remix-run/node'
 
-import Layout from "~/routes/_app/layout";
-import { merge } from "~/utils/utils";
-import { useRouteData } from "~/hooks/useRouteData";
+import Layout from '~/routes/_app/layout'
+import {merge} from '~/utils/utils'
+import {useRouteData} from '~/hooks/useRouteData'
 
-import stylesheet from "~/css/index.css";
-import { getSite } from "~/loaders/getSite";
+import stylesheet from '~/css/index.css'
+import {getSite} from '~/loaders/getSite'
 
 export const links: LinksFunction = () => {
-  return [
-    { rel: 'stylesheet', href: stylesheet },
-  ];
-};
+  return [{rel: 'stylesheet', href: stylesheet}]
+}
 
 export const loader = async (args: LoaderArgs) => {
-  const data = await merge([
-		getSite(args)
-	])
+  const data = await merge([getSite(args)])
 
   return data
 }
@@ -27,37 +23,39 @@ export default function App() {
 
   return (
     <Layout>
-			<Outlet />
-		</Layout>
-  );
+      <Outlet />
+    </Layout>
+  )
 }
 
 export function ErrorBoundary() {
-  const { site } = useRouteData()
-  const error = useRouteError();
+  const {site} = useRouteData()
+  const error = useRouteError()
 
   const errorInfo: any = error
 
   return (
     <Layout>
-      <div className='max-w-6xl py-16 mx-auto prose prose-xl text-center prose-h1:text-9xl prose-h1:mb-4 sm:py-24 sm:px-6'>
+      <div className="max-w-6xl py-16 mx-auto prose prose-xl text-center prose-h1:text-9xl prose-h1:mb-4 sm:py-24 sm:px-6">
         {isRouteErrorResponse(error) ? (
-          <div className='grid justify-center'>
+          <div className="grid justify-center">
             <h1>404</h1>
             <h2>Page Not Found</h2>
             <p>
-              The page you are looking for doesn't exist or an other error occured. Go to <Link to={site.home.slug}>Home Page</Link>.
+              The page you are looking for doesn&apos;t exist or an other error occured. Go to{' '}
+              <Link to={site.home.slug}>Home Page</Link>.
             </p>
           </div>
         ) : (
           <>
             <pre>
-              {!!(errorInfo.cause || errorInfo.name)&&`${errorInfo.cause || errorInfo.name}: `}{errorInfo.message}
+              {!!(errorInfo.cause || errorInfo.name) && `${errorInfo.cause || errorInfo.name}: `}
+              {errorInfo.message}
               {!!Object.keys(errorInfo).length && JSON.stringify(errorInfo, null, 2)}
             </pre>
           </>
         )}
       </div>
     </Layout>
-  );
+  )
 }

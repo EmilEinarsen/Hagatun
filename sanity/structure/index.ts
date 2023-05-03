@@ -1,27 +1,27 @@
-import { settingsMenu } from './desk/settings'
-import { pagesMenu } from './desk/pages'
-import { menusMenu } from './desk/menus'
-import { postsMenu } from './desk/posts'
+import {settingsMenu} from './desk/settings'
+import {pagesMenu} from './desk/pages'
+import {menusMenu} from './desk/menus'
+import {postsMenu} from './desk/posts'
 
-import type { StructureResolver, ListItemBuilder } from 'sanity/desk'
+import type {StructureResolver, ListItemBuilder} from 'sanity/desk'
 
 const hiddenDocTypes = (listItem: ListItemBuilder) =>
   ![
     'page',
 
-		'blogPost',
+    'blogPost',
 
     'generalSettings',
     'seoSettings',
     'headerSettings',
     'footerSettings',
 
-		'author',
-		'category',
+    'author',
+    'category',
     'menu',
 
     'media.tag',
-  ].includes(listItem.getId()||'')
+  ].includes(listItem.getId() || '')
 
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -36,5 +36,5 @@ export const structure: StructureResolver = (S) =>
       settingsMenu(S),
 
       // Filter out docs already defined above
-      ...S.documentTypeListItems().filter(hiddenDocTypes)
+      ...S.documentTypeListItems().filter(hiddenDocTypes),
     ])

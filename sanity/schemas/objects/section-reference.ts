@@ -1,5 +1,5 @@
-import { CubeIcon } from '@heroicons/react/24/outline'
-import { defineType } from 'sanity';
+import {CubeIcon} from '@heroicons/react/24/outline'
+import {defineType} from 'sanity'
 
 export const sectionReference = defineType({
   type: 'object',
@@ -11,17 +11,17 @@ export const sectionReference = defineType({
       type: 'reference',
       name: 'section',
       title: 'Section',
-      to: [{ type: 'section' }]
-    }
+      to: [{type: 'section'}],
+    },
   ],
   preview: {
     select: {
       title: 'section.name',
-      type: 'section._type'
+      type: 'section._type',
     },
-    prepare: ({ title, type }) => ({
+    prepare: ({title, type}) => ({
       title: title,
-      subtitle: type
-    })
-  }
+      subtitle: type,
+    }),
+  },
 })

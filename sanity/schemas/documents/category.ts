@@ -1,4 +1,4 @@
-import { defineType } from "sanity";
+import {defineType} from 'sanity'
 
 export const category = defineType({
   type: 'document',
@@ -14,6 +14,6 @@ export const category = defineType({
       type: 'text',
       name: 'description',
       title: 'Description',
-    }
-  ]
+    },
+  ],
 })
