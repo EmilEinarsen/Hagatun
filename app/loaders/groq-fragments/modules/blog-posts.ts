@@ -1,13 +1,14 @@
-import groq from "groq";
-import { Post, post } from "../documents/blog-post";
+import groq from 'groq'
+import type {Post} from '../documents/blog-post'
+import {post} from '../documents/blog-post'
 
 export type BlogPostsModule = {
-	_key: string
-	_type: 'blog-posts'
+  _key: string
+  _type: 'blog-posts'
   title: string
   subtitle?: string
-	orderBy: 'recent' | 'featured'
-	posts: Post[]
+  orderBy: 'recent' | 'featured'
+  posts: Post[]
 }
 
 export const blogPostsQuery = groq`

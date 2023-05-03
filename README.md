@@ -1,10 +1,12 @@
 <!-- <a href="https://hagatun.se/"> -->
+
 <img 
 	src="https://i.ibb.co/r7JYZrL/maskable-icon.png" 
 	alt="Hagatun Revision" 
 	border="0"
 	width="200px"
 />
+
 <!-- </a> -->
 
 # Welcome to Hagatun!
@@ -14,6 +16,7 @@
 - [Open-props Docs](https://open-props.style/)
 
 ## Front-end
+
 Our choice of framework is Remix. For it's fundamentally web-first principals and ease to mediate the split JS between client and server.
 
 ### Development
@@ -41,6 +44,7 @@ npm start
 ```
 
 ## CMS
+
 Our choice of CMS is Sanity. For it's customizability and great developer experience.
 
 ### Development

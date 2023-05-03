@@ -1,20 +1,22 @@
-import groq from "groq";
+import groq from 'groq'
 
-import { menu, MenuItem } from "./menu";
+import type {MenuItem} from './menu'
+import {menu} from './menu'
 
 export type Header = {
-	menu: { 
-		_key: string,
-		_type: 'menu'
-		items?: (
-			{ 
-				_key: string
-				_type: 'menu'
-				title: string
-				items?: MenuItem[]
-			} | MenuItem
-		)[]
-	}
+  menu: {
+    _key: string
+    _type: 'menu'
+    items?: (
+      | {
+          _key: string
+          _type: 'menu'
+          title: string
+          items?: MenuItem[]
+        }
+      | MenuItem
+    )[]
+  }
 }
 
 export const header = groq`

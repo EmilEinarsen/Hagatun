@@ -7,31 +7,26 @@ import TextImage from './text-image'
 import ContactForm from './contact-form'
 import BlogPosts from './blog-posts'
 
-import type { Modules } from '~/loaders/groq-fragments/modules/modules'
+import type {Modules} from '~/loaders/groq-fragments/modules/modules'
 
 export interface ModuleProps<T extends Modules['_type'] = Modules['_type']> {
-  index: number;
-  data: Extract<Modules, { _type: T }>;
-  activeVariant?: unknown;
-  onVariantChange?: unknown;
+  index: number
+  data: Extract<Modules, {_type: T}>
+  activeVariant?: unknown
+  onVariantChange?: unknown
 }
 
 const modules = {
-	hero: Hero,
-	cta: CTA,
-	partners: Partners,
-	'text-image': TextImage,
+  hero: Hero,
+  cta: CTA,
+  partners: Partners,
+  'text-image': TextImage,
   'contact-form': ContactForm,
-  'blog-posts': BlogPosts
-} as { [k in Modules['_type']]: React.FunctionComponent<ModuleProps> };
+  'blog-posts': BlogPosts,
+} as {[k in Modules['_type']]: React.FunctionComponent<ModuleProps>}
 
-export const Module = ({
-  index,
-  data,
-  activeVariant,
-  onVariantChange,
-}: ModuleProps) => {
-	const ModuleType = modules[data._type]
+export const Module = ({index, data, activeVariant, onVariantChange}: ModuleProps) => {
+  const ModuleType = modules[data._type]
 
   return ModuleType ? (
     <ModuleType
@@ -40,5 +35,5 @@ export const Module = ({
       activeVariant={activeVariant}
       onVariantChange={onVariantChange}
     />
-  ) : null;
+  ) : null
 }

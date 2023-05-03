@@ -1,5 +1,5 @@
 import groq from 'groq'
-import { referenceWithSlug } from './objects/links'
+import {referenceWithSlug} from './objects/links'
 
 export const links = groq`
   _type == 'navLInk' => {

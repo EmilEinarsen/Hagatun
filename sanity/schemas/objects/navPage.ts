@@ -1,6 +1,6 @@
-import { defineType } from 'sanity';
-import { LinkIcon } from '@heroicons/react/24/outline'
-import { i18n } from 'sanity/lib/i18n';
+import {defineType} from 'sanity'
+import {LinkIcon} from '@heroicons/react/24/outline'
+import {i18n} from 'sanity/lib/i18n'
 
 export const navPage = defineType({
   type: 'object',
@@ -12,25 +12,25 @@ export const navPage = defineType({
       type: 'reference',
       name: 'page',
       title: 'Page',
-      to: [{ type: 'page' }],
-			options: {
-				filter: ({ document }) => ({
-					filter: `${i18n.fieldNames.lang} == "${document.__i18n_lang}"` as any
-				})
-			},
-    }
+      to: [{type: 'page'}],
+      options: {
+        filter: ({document}) => ({
+          filter: `${i18n.fieldNames.lang} == "${document.__i18n_lang}"` as any,
+        }),
+      },
+    },
   ],
   preview: {
     select: {
       title: 'page.title',
       pageType: 'page._type',
-      pageSlug: 'page.slug.current'
+      pageSlug: 'page.slug.current',
     },
-    prepare({ title, pageSlug }) {
+    prepare({title, pageSlug}) {
       return {
         title: title,
-        subtitle: `/${pageSlug}`
+        subtitle: `/${pageSlug}`,
       }
-    }
-  }
+    },
+  },
 })

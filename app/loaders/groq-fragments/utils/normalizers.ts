@@ -1,5 +1,5 @@
 import groq from 'groq'
-import { i18n } from '../../../../sanity/lib/i18n'
+import {i18n} from '../../../../sanity/lib/i18n'
 
 export const normalizeSlug = groq`
   {

@@ -7,11 +7,9 @@
 @import './theme.css';
 
 @layer base {
-  
 }
 
 /* Tailwind directives: https://tailwindcss.com/docs/functions-and-directives/#responsive */
-
 
 html {
   scroll-behavior: smooth;
@@ -19,11 +17,12 @@ html {
 }
 
 ::selection {
-  background: #B4D5FF;
+  background: #b4d5ff;
 }
 
-html::-moz-selection { /* Code for Firefox */
-  background: #B4D5FF;
+html::-moz-selection {
+  /* Code for Firefox */
+  background: #b4d5ff;
 }
 
 /* Buttons */

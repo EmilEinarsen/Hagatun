@@ -1,4 +1,4 @@
-import { defineType } from "sanity";
+import {defineType} from 'sanity'
 
 export const author = defineType({
   type: 'document',
@@ -13,7 +13,7 @@ export const author = defineType({
     {
       type: 'string',
       name: 'role',
-      title: 'Roll'
+      title: 'Roll',
     },
     {
       type: 'slug',
@@ -21,16 +21,16 @@ export const author = defineType({
       title: 'Slug',
       options: {
         source: 'name',
-        maxLength: 96
-      }
+        maxLength: 96,
+      },
     },
     {
       type: 'image',
       name: 'image',
       title: 'Image',
       options: {
-        hotspot: true
-      }
+        hotspot: true,
+      },
     },
     {
       type: 'array',
@@ -41,15 +41,15 @@ export const author = defineType({
           type: 'block',
           title: 'Block',
           styles: [{title: 'Normal', value: 'normal'}],
-          lists: []
-        }
-      ]
-    }
+          lists: [],
+        },
+      ],
+    },
   ],
   preview: {
     select: {
       title: 'name',
-      media: 'image'
-    }
-  }
+      media: 'image',
+    },
+  },
 })

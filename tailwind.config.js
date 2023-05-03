@@ -2,11 +2,8 @@ const colors = require('tailwindcss/colors')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./app/**/*.{js,jsx,ts,tsx}"],
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms')
-  ],
+  content: ['./app/**/*.{js,jsx,ts,tsx}'],
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
   theme: {
     colors: {
       transparent: colors.transparent,
@@ -16,7 +13,7 @@ module.exports = {
       red: colors.red,
       green: colors.green,
       blue: colors.blue,
-    }
+    },
   },
   darkMode: 'class',
-};
+}

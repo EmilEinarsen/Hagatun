@@ -1,4 +1,4 @@
-import groq from "groq"
+import groq from 'groq'
 
 export const queryHomeID = groq`
 	*[_type=="generalSettings"][0].home->_id

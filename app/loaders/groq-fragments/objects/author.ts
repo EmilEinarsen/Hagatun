@@ -1,9 +1,10 @@
 import groq from 'groq'
-import { PortableTextBlock } from 'sanity'
-import { ImageObject, imageQuery } from 'sanity-page-builder'
+import type {PortableTextBlock} from 'sanity'
+import type {ImageObject} from 'sanity-page-builder'
+import {imageQuery} from 'sanity-page-builder'
 
 export type Author = {
-  _type: 'author',
+  _type: 'author'
   id: string
   name: string
   role: string
@@ -18,7 +19,7 @@ export const author = groq`
   name,
   role,
   image {
-    ${imageQuery }
+    ${imageQuery}
   },
   bio,
   "slug": slug.current

@@ -1,17 +1,22 @@
 import groq from 'groq'
-import { Hero, heroQuery, TextImage, textImageQuery } from 'sanity-page-builder'
+import type {Hero, TextImage} from 'sanity-page-builder'
+import {heroQuery, textImageQuery} from 'sanity-page-builder'
 
-import { ctaQuery, CTAModule } from './cta'
-import { PartnersModule, partnersQuery } from './partners'
-import { BlogPostsModule, blogPostsQuery } from './blog-posts'
-import { ContactFormModule, contactFormQuery } from './contact-form'
+import type {CTAModule} from './cta'
+import {ctaQuery} from './cta'
+import type {PartnersModule} from './partners'
+import {partnersQuery} from './partners'
+import type {BlogPostsModule} from './blog-posts'
+import {blogPostsQuery} from './blog-posts'
+import type {ContactFormModule} from './contact-form'
+import {contactFormQuery} from './contact-form'
 
 export type Modules =
   | Hero
-	| CTAModule
-	| PartnersModule
-	| BlogPostsModule
-	| TextImage
+  | CTAModule
+  | PartnersModule
+  | BlogPostsModule
+  | TextImage
   | ContactFormModule
 
 const actualModules = groq`

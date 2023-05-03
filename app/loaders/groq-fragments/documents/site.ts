@@ -1,11 +1,15 @@
 import groq from 'groq'
-import { i18n } from '../../../../sanity/lib/i18n'
-import { ImageObject, imageQuery } from 'sanity-page-builder'
+import {i18n} from '../../../../sanity/lib/i18n'
+import type {ImageObject} from 'sanity-page-builder'
+import {imageQuery} from 'sanity-page-builder'
 
-import { ReferenceWithSlug, referenceWithSlug } from '../objects/links'
-import { filterById, filterSavedPages } from '../utils/filters'
-import { Header, header } from './header'
-import { Footer, footer } from './footer'
+import type {ReferenceWithSlug} from '../objects/links'
+import {referenceWithSlug} from '../objects/links'
+import {filterById, filterSavedPages} from '../utils/filters'
+import type {Header} from './header'
+import {header} from './header'
+import type {Footer} from './footer'
+import {footer} from './footer'
 
 export type Office = {
   _type: 'office'
@@ -17,51 +21,59 @@ export type Office = {
 
 export type Company = {
   _key: string
-  _type: 'information',
+  _type: 'information'
   postalAddress: string
   email: string
   offices?: Office[]
 }
 
-export type Site = {
-	home: ReferenceWithSlug
-	pages: (ReferenceWithSlug & { translations: ReferenceWithSlug[] })[]
-	header: Header
-	footer: Footer
-	company: Company
-	title: string
-	shortTitle: string
-	rootDomain: string
-	presets: {
-		themeSwitch: boolean
-		languageSelect: boolean
-	}
+export type Site =
+  | {
+      home: ReferenceWithSlug
+      pages: (ReferenceWithSlug & {translations: ReferenceWithSlug[]})[]
+      header: Header
+      footer: Footer
+      company: Company
+      title: string
+      shortTitle: string
+      rootDomain: string
+      presets: {
+        themeSwitch: boolean
+        languageSelect: boolean
+      }
 
-	cookieConsent: {
-		enabled: boolean
-		message: null
-		link: null
-	}
+      cookieConsent: {
+        enabled: boolean
+        message: null
+        link: null
+      }
 
-	seo: {
-		metaTitle: string,
-		metaDesc: string,
-		shareTitle: string,
-		shareDesc: string,
-		favicon: ImageObject | null,
-		faviconLegacy: ImageObject | null,
-		shareGraphic: ImageObject | null,
-		touchIcon: ImageObject | null
-	}
-} | null | undefined
+      seo: {
+        metaTitle: string
+        metaDesc: string
+        shareTitle: string
+        shareDesc: string
+        favicon: ImageObject | null
+        faviconLegacy: ImageObject | null
+        shareGraphic: ImageObject | null
+        touchIcon: ImageObject | null
+      }
+    }
+  | null
+  | undefined
 
 export const site = groq`
-	"home": *[_type == 'page']${filterById.replace('$id', '*[_type=="generalSettings"][0].home->_id')}[__i18n_lang == $lang][0] {
+	"home": *[_type == 'page']${filterById.replace(
+    '$id',
+    '*[_type=="generalSettings"][0].home->_id'
+  )}[__i18n_lang == $lang][0] {
 		${referenceWithSlug}
 	},
 	"pages": *${filterSavedPages}[__i18n_lang == '${i18n.base}'] {
 		${referenceWithSlug},
-		"translations": *[_type == 'page']${filterById.replace('$id', '^._id')}[__i18n_lang != '${i18n.base}'] { 
+		"translations": *[_type == 'page']${filterById.replace('$id', '^._id')}[__i18n_lang != '${
+  i18n.base
+}'] { 
 			${referenceWithSlug}
 		}
 	},

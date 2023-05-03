@@ -1,13 +1,15 @@
-import groq from "groq";
-import { ImageObject, imageQuery } from 'sanity-page-builder'
+import groq from 'groq'
+import type {ImageObject} from 'sanity-page-builder'
+import {imageQuery} from 'sanity-page-builder'
 
-import { referenceBlogPostWithSlug, referenceWithSlug } from "../objects/links";
-import { filterById, filterSavedPages } from "../utils";
-import { PortableTextBlock } from "sanity";
-import { Locale } from "sanity/lib/i18n";
-import { author, Author } from "../objects/author";
-import { queryBlogID, queryHomeID } from "~/loaders/ids";
-import { normalizeSlug } from "../utils/normalizers";
+import {referenceBlogPostWithSlug, referenceWithSlug} from '../objects/links'
+import {filterById, filterSavedPages} from '../utils'
+import type {PortableTextBlock} from 'sanity'
+import type {Locale} from 'sanity/lib/i18n'
+import type {Author} from '../objects/author'
+import {author} from '../objects/author'
+import {queryBlogID} from '~/loaders/ids'
+import {normalizeSlug} from '../utils/normalizers'
 
 export const post = groq`
 	"id": _id,
@@ -42,24 +44,24 @@ export const post = groq`
 `
 
 export type Post = {
-	id: string
-	_type: 'blog-post'
-	href: {
-		slug: string
-		title: string
-		lang: string
-	}
-	title: string
-	image: ImageObject
-	description?: string
-	body: PortableTextBlock
-	publishedAt: string
-	author: Author
+  id: string
+  _type: 'blog-post'
+  href: {
+    slug: string
+    title: string
+    lang: string
+  }
+  title: string
+  image: ImageObject
+  description?: string
+  body: PortableTextBlock
+  publishedAt: string
+  author: Author
   category: {
     title: string
     description: string
   }
-  breadcrumbs: { name: string, href: string }[]
+  breadcrumbs: {name: string; href: string}[]
 }
 
 export const blogPost = groq`
@@ -71,13 +73,13 @@ export const blogPost = groq`
 `
 
 export type BlogPost = Post & {
-	id: string
+  id: string
   lang: Locale
-	translations?: {
-		slug: string
-		title: string
-		lang: Locale
-	}[]
+  translations?: {
+    slug: string
+    title: string
+    lang: Locale
+  }[]
 }
 
 export const blogPosts = groq`
@@ -93,15 +95,14 @@ export const blogPosts = groq`
   "numberOfPosts": count(*[_type == 'blogPost'])
 `
 export type BlogPosts = {
-	id: string
-	title: string
+  id: string
+  title: string
   lang: Locale
   posts: Post[]
-	translations?: {
-		slug: string
-		title: string
-		lang: Locale
-	}[]
+  translations?: {
+    slug: string
+    title: string
+    lang: Locale
+  }[]
   numberOfPosts: number
 }
-

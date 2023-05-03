@@ -1,10 +1,10 @@
 import groq from 'groq'
 
-import { page } from './documents/page'
-import { blogPost, blogPosts } from './documents/blog-post'
-import { site } from './documents/site'
-import { conditionNoDraft } from './utils/conditions'
-import { filterSavedPages, filterById, filterBySlug } from './utils/filters'
+import {page} from './documents/page'
+import {blogPost, blogPosts} from './documents/blog-post'
+import {site} from './documents/site'
+import {conditionNoDraft} from './utils/conditions'
+import {filterSavedPages, filterById, filterBySlug} from './utils/filters'
 
 export const siteQuery = groq`{ ${site} }`
 

@@ -1,8 +1,8 @@
-import { LinkIcon } from '@heroicons/react/24/outline'
-import { defineType } from 'sanity'
+import {LinkIcon} from '@heroicons/react/24/outline'
+import {defineType} from 'sanity'
 
 export const navLink = defineType({
-	type: 'object',
+  type: 'object',
   name: 'navLink',
   title: 'Link',
   icon: LinkIcon,
@@ -11,29 +11,29 @@ export const navLink = defineType({
       type: 'string',
       name: 'title',
       title: 'Title',
-      description: 'Display Text'
+      description: 'Display Text',
     },
     {
       type: 'url',
       name: 'url',
       title: 'URL',
       description: 'enter an external URL',
-      validation: Rule =>
+      validation: (Rule) =>
         Rule.uri({
-          scheme: ['http', 'https', 'mailto', 'tel']
-        })
-    }
+          scheme: ['http', 'https', 'mailto', 'tel'],
+        }),
+    },
   ],
   preview: {
     select: {
       title: 'title',
-      url: 'url'
+      url: 'url',
     },
-    prepare({ title, url }) {
+    prepare({title, url}) {
       return {
         title: title ?? url,
-        subtitle: title && url
+        subtitle: title && url,
       }
-    }
-  }
+    },
+  },
 })

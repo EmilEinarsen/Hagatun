@@ -1,0 +1,9 @@
+.vercel
+.cache
+.vscode
+.husky
+build
+node_modules
+package-lock.json
+public
+remix.env.d.ts

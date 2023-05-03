@@ -1,6 +1,6 @@
 import groq from 'groq'
 
-import { conditionNoDraft } from'./conditions'
+import {conditionNoDraft} from './conditions'
 
 export const filterSavedPages = groq`
 	[_type == 'page' && ${conditionNoDraft}]

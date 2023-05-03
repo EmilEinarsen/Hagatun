@@ -1,4 +1,4 @@
-import { assert } from "~/utils/utils"
+import {assert} from '~/utils/utils'
 
 export const getENV = () => {
   const env = typeof document === 'undefined' ? process?.env : window?.ENV

@@ -1,23 +1,22 @@
-import { Link } from '@remix-run/react'
-import { clsx, dateFormat } from '~/utils/utils'
-import { Image } from '../core/image'
+import {Link} from '@remix-run/react'
+import {clsx} from 'clsx'
+import {dateFormat} from '~/utils/utils'
+import {Image} from '../core/image'
 
-import type { Post } from '~/loaders/groq-fragments/documents/blog-post'
+import type {Post} from '~/loaders/groq-fragments/documents/blog-post'
 
-interface BlogPostProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> {
+interface BlogPostProps
+  extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> {
   post: Post
   withoutImage?: boolean
 }
 
-export const BlogPost = ({ post, withoutImage, ...props }: BlogPostProps) => {
+export const BlogPost = ({post, withoutImage, ...props}: BlogPostProps) => {
   return (
-    <article 
+    <article
       key={post.id}
       {...props}
-      className={clsx(
-        'relative flex flex-col gap-8 isolate lg:flex-row',
-        props.className
-      )}
+      className={clsx('relative flex flex-col gap-8 isolate lg:flex-row', props.className)}
     >
       <div className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-48 lg:shrink-0">
         <Image
@@ -35,7 +34,7 @@ export const BlogPost = ({ post, withoutImage, ...props }: BlogPostProps) => {
           </time>
           <p
             /* href={post.category.href} */
-            className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600"/* hover:bg-gray-100 */
+            className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600" /* hover:bg-gray-100 */
           >
             {post.category.title}
           </p>
@@ -54,9 +53,7 @@ export const BlogPost = ({ post, withoutImage, ...props }: BlogPostProps) => {
             <Image image={post.author.image} className="w-10 h-10 rounded-full bg-gray-50" />
             <div className="text-sm leading-6">
               <p className="font-semibold text-gray-900">
-                <span /* href={post.author.slug} */>
-                  {post.author.name}
-                </span>
+                <span /* href={post.author.slug} */>{post.author.name}</span>
               </p>
               <p className="text-gray-600">{post.author.role}</p>
             </div>
